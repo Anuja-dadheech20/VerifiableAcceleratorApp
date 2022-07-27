@@ -1,0 +1,177 @@
+<!--
+  @description       : 
+  @author            : Anuja Dadheech
+  @group             : 
+  @last modified on  : 07-25-2022
+  @last modified by  : Anuja Dadheech
+-->
+<template>
+  <template if:true={loaded}>
+    <!--Heading of the screen-->
+    <div class="container slds-p-around_small">
+      <div
+        class="slds-text-heading_large slds-p-around_small slds-border_bottom"
+      >
+        <b> Get Started </b>
+      </div>
+
+      <div
+        class="slds-text-color_default slds-p-bottom_medium slds-p-top_medium slds-p-left_medium"
+      >
+        <h3>Complete this form to begin your credentialing process.</h3>
+      </div>
+
+      <!--Body of the screen-->
+      <lightning-layout multiple-rows>
+        <lightning-layout-item
+          size="12"
+          small-device-size="12"
+          medium-device-size="6"
+          large-device-size="6"
+          class="slds-align_absolute-center"
+        >
+          <lightning-input
+            type="email"
+            value={contact.email}
+            label="Email"
+            class="slds-m-around_xx-small input"
+            max-length="50"
+            style="width: 90%"
+          >
+          </lightning-input>
+        </lightning-layout-item>
+
+        <lightning-layout-item
+          size="12"
+          small-device-size="12"
+          medium-device-size="6"
+          large-device-size="6"
+          class="slds-align_absolute-center"
+        >
+          <lightning-input
+            type="tel"
+            value={contact.phone}
+            label="Phone"
+            class="slds-m-around_xx-small input"
+            max-length="10"
+            style="width: 90%"
+          >
+          </lightning-input>
+        </lightning-layout-item>
+
+        <lightning-layout-item
+          size="12"
+          small-device-size="12"
+          medium-device-size="6"
+          large-device-size="6"
+          class="slds-align_absolute-center"
+        >
+          <lightning-input
+            type="text"
+            value={contact.firstname}
+            label="First Name"
+            class="slds-m-around_small input"
+            style="width: 90%"
+            max-length="255"
+            required
+          >
+          </lightning-input>
+        </lightning-layout-item>
+
+        <lightning-layout-item
+          size="12"
+          small-device-size="12"
+          medium-device-size="6"
+          large-device-size="6"
+          class="slds-align_absolute-center"
+        >
+          <lightning-input
+            type="text"
+            value={contact.lastname}
+            label="Last Name"
+            class="slds-m-around_small input"
+            style="width: 90%"
+            max-length="255"
+            required
+          >
+          </lightning-input>
+        </lightning-layout-item>
+
+        <lightning-layout-item
+          size="12"
+          small-device-size="12"
+          medium-device-size="12"
+          large-device-size="12"
+          class="slds-align_absolute-left"
+        >
+          <lightning-input
+            type="checkbox"
+            checked={otherNameCheckbox}
+            label="Add other names (for example maiden name or alias)."
+            onchange={handleOtherNameCheckbox}
+            class="slds-m-around_small"
+            style="left: 2%"
+          >
+          </lightning-input>
+        </lightning-layout-item>
+
+        <template if:true={otherNameCheckbox}>
+          <lightning-layout-item size="12">
+            <c-add-other-names
+              other-names-array={otherNamesArray}
+              onaddothername={handleAddOtherName}
+              onremoveothername={handleRemoveOtherName}
+            ></c-add-other-names>
+          </lightning-layout-item>
+        </template>
+
+        <lightning-layout-item
+          size="12"
+          small-device-size="12"
+          medium-device-size="6"
+          large-device-size="6"
+          class="slds-align_absolute-center"
+        >
+          <lightning-input
+            type="text"
+            value={contact.npi}
+            label="NPI"
+            class="slds-m-around_small input"
+            style="width: 90%"
+            max-length="10"
+            min-length="10"
+          >
+          </lightning-input>
+        </lightning-layout-item>
+
+        <lightning-layout-item
+          size="12"
+          small-device-size="12"
+          medium-device-size="6"
+          large-device-size="6"
+          class="slds-align_absolute-center"
+        >
+          <lightning-input
+            type="date"
+            value={contact.dob}
+            label="DOB"
+            class="slds-m-around_small input"
+            style="width: 90%"
+            message-when-bad-input="Date format MMM DD,YYYY"
+          >
+          </lightning-input>
+        </lightning-layout-item>
+      </lightning-layout>
+    </div>
+  </template>
+
+  <!--Spinner-->
+  <template if:false={loaded}>
+    <div style="height: 100px">
+      <lightning-spinner
+        alternative-text="Loading"
+        size="medium"
+      ></lightning-spinner>
+    </div>
+  </template>
+</template>

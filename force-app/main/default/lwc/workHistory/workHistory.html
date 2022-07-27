@@ -1,0 +1,322 @@
+<!--
+  @description       : 
+  @author            : Anuja Dadheech
+  @group             : 
+  @last modified on  : 07-25-2022
+  @last modified by  : Anuja Dadheech
+-->
+<template>
+  <template if:true={loaded}>
+    <!--Heading of the screen-->
+    <div class="container slds-p-around_small">
+      <div class="slds-text-heading_large slds-p-around_small">
+        <b> Work History </b>
+      </div>
+
+      <div
+        class="slds-text-color_default slds-p-bottom_medium slds-p-top_medium slds-p-left_medium"
+      >
+        <h3>
+          Add your work history for the past ten years. If you have any gaps in
+          your work history greater than 6 months, please indicate below.
+        </h3>
+      </div>
+
+      <template for:each={workHistoryArray} for:item="each" for:index="index">
+        <!--Body of the screen-->
+        <div key={each} class="slds-p-around_small">
+          <lightning-layout multiple-rows>
+            <lightning-layout-item
+              size="12"
+              small-device-size="12"
+              medium-device-size="12"
+              large-device-size="12"
+            >
+              <lightning-icon
+                class="slds-p-around_x-small"
+                data-index={index}
+                onclick={removeWorkHistory}
+                icon-name="utility:clear"
+                alternative-text="Remove"
+                title="Remove"
+                size="x-small"
+              >
+              </lightning-icon>
+              <span>Work History</span>
+            </lightning-layout-item>
+
+            <lightning-layout-item
+              size="12"
+              small-device-size="12"
+              medium-device-size="6"
+              large-device-size="6"
+              class="slds-p-around_x-small"
+            >
+              <lightning-combobox
+                style="width: 90%"
+                data-index={index}
+                class="input"
+                name="Work History Type"
+                label="Work History Type"
+                value={each.verifiable__Type__c}
+                placeholder=""
+                options={WorkHistoryType}
+                onchange={handleInputBoxChange}
+              >
+              </lightning-combobox>
+            </lightning-layout-item>
+
+            <template if:false={each.Gap}>
+              <lightning-layout-item
+                size="12"
+                small-device-size="12"
+                medium-device-size="12"
+                large-device-size="12"
+                class="slds-p-around_x-small"
+              >
+                <lightning-input
+                  class="input"
+                  value={each.Name}
+                  onchange={handleInputBoxChange}
+                  data-index={index}
+                  style="width: 90%"
+                  type="text"
+                  label="Practice/Employer Name"
+                  max-length="80"
+                ></lightning-input>
+              </lightning-layout-item>
+
+              <lightning-layout-item
+                size="12"
+                small-device-size="12"
+                medium-device-size="12"
+                large-device-size="12"
+                class="slds-p-around_x-small"
+              >
+                <lightning-input
+                  class="input"
+                  value={each.verifiable__JobTitle__c}
+                  onchange={handleInputBoxChange}
+                  data-index={index}
+                  style="width: 90%"
+                  type="text"
+                  label="Title"
+                  max-length="100"
+                ></lightning-input>
+              </lightning-layout-item>
+            </template>
+
+            <lightning-layout-item
+              size="12"
+              small-device-size="12"
+              medium-device-size="3"
+              large-device-size="3"
+              class="slds-p-around_x-small"
+            >
+              <lightning-input
+                type="date"
+                data-id="StartDate"
+                data-index={index}
+                value={each.verifiable__StartDate__c}
+                label="Start Date"
+                class="input"
+                onchange={handleInputBoxChange}
+                style="width: 90%"
+              >
+              </lightning-input>
+            </lightning-layout-item>
+
+            <template if:false={each.verifiable__IsCurrentEmployer__c}>
+              <lightning-layout-item
+                size="12"
+                small-device-size="12"
+                medium-device-size="3"
+                large-device-size="3"
+                class="slds-p-around_x-small"
+              >
+                <lightning-input
+                  type="date"
+                  data-index={index}
+                  value={each.verifiable__EndDate__c}
+                  label="End Date"
+                  class="input"
+                  onchange={handleInputBoxChange}
+                  style="width: 90%"
+                >
+                </lightning-input>
+              </lightning-layout-item>
+            </template>
+
+            <template if:false={each.Gap}>
+              <lightning-layout-item
+                size="12"
+                small-device-size="12"
+                medium-device-size="12"
+                large-device-size="12"
+                class="slds-p-around_x-small"
+              >
+                <lightning-input
+                  class="input"
+                  onchange={handleInputBoxChange}
+                  checked={each.verifiable__IsCurrentEmployer__c}
+                  data-index={index}
+                  style="width: 90%"
+                  type="checkbox"
+                  label="Current Employer"
+                  name="current employer"
+                >
+                </lightning-input>
+              </lightning-layout-item>
+
+              <lightning-layout-item
+                size="12"
+                small-device-size="12"
+                medium-device-size="12"
+                large-device-size="12"
+                class="slds-p-around_x-small"
+                style="width: 100%"
+              >
+                <lightning-input
+                  type="text"
+                  data-index={index}
+                  value={each.verifiable__AddressLine1__c}
+                  label="Address"
+                  class="input"
+                  placeholder="Address Line 1"
+                  onchange={handleInputBoxChange}
+                ></lightning-input>
+                <lightning-input
+                  type="text"
+                  data-index={index}
+                  value={each.verifiable__AddressLine2__c}
+                  class="input"
+                  label="Address Line 2"
+                  placeholder="Address Line 2"
+                  onchange={handleInputBoxChange}
+                  max-length="255"
+                >
+                </lightning-input>
+              </lightning-layout-item>
+
+              <lightning-layout-item
+                size="12"
+                small-device-size="12"
+                medium-device-size="4"
+                large-device-size="4"
+                class="slds-p-around_x-small"
+              >
+                <lightning-input
+                  type="text"
+                  data-index={index}
+                  value={each.verifiable__AddressCity__c}
+                  label="City"
+                  class="input"
+                  placeholder="City"
+                  onchange={handleInputBoxChange}
+                  max-length="255"
+                >
+                </lightning-input>
+              </lightning-layout-item>
+
+              <lightning-layout-item
+                size="12"
+                small-device-size="12"
+                medium-device-size="4"
+                large-device-size="4"
+                class="slds-p-around_x-small"
+              >
+                <lightning-combobox
+                  name="State"
+                  label="State"
+                  value={each.verifiable__AddressState__c}
+                  class="input"
+                  placeholder="State"
+                  options={StateList}
+                  onchange={handleInputBoxChange}
+                  data-index={index}
+                >
+                </lightning-combobox>
+              </lightning-layout-item>
+
+              <lightning-layout-item
+                size="12"
+                small-device-size="12"
+                medium-device-size="4"
+                large-device-size="4"
+                class="slds-p-around_x-small"
+              >
+                <lightning-input
+                  type="text"
+                  data-index={index}
+                  value={each.verifiable__AddressZip__c}
+                  label="Zip Code"
+                  class="input"
+                  placeholder="Zip Code"
+                  onchange={handleInputBoxChange}
+                  max-length="10"
+                >
+                </lightning-input>
+              </lightning-layout-item>
+
+              <lightning-layout-item
+                size="12"
+                small-device-size="12"
+                medium-device-size="12"
+                large-device-size="12"
+                class="slds-p-around_x-small"
+              >
+                <lightning-textarea
+                  class="input"
+                  data-index={index}
+                  name="Reason"
+                  label="Reason for Departure (if applicable)"
+                  value={each.verifiable__DepartureReason__c}
+                  onchange={handleInputBoxChange}
+                  max-length="255"
+                >
+                </lightning-textarea>
+              </lightning-layout-item>
+            </template>
+
+            <template if:true={each.Gap}>
+              <lightning-layout-item
+                size="12"
+                small-device-size="12"
+                medium-device-size="12"
+                large-device-size="12"
+                class="slds-p-around_x-small"
+              >
+                <lightning-textarea
+                  class="input"
+                  data-index={index}
+                  name="Gap"
+                  label="Gap Explanation"
+                  value={each.verifiable__GapExplanation__c}
+                  onchange={handleInputBoxChange}
+                  max-length="255"
+                >
+                </lightning-textarea>
+              </lightning-layout-item>
+            </template>
+          </lightning-layout>
+        </div>
+      </template>
+
+      <!--Add Work History Button-->
+      <lightning-button
+        label="Add Work History"
+        title="Non-primary action"
+        onclick={addWorkHistory}
+        class="slds-p-around_medium"
+      ></lightning-button>
+    </div>
+  </template>
+
+  <!--Spinner-->
+  <template if:false={loaded}>
+    <lightning-spinner
+      alternative-text="Loading"
+      size="medium"
+    ></lightning-spinner>
+  </template>
+</template>

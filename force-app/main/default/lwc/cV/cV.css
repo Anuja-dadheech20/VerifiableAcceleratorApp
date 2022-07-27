@@ -1,0 +1,11 @@
+.container{
+    background: white;
+}
+.lgc-bg {
+    background-color: rgb(242, 242, 242);
+}
+.btn-neutral{
+    --sds-c-button-text-color: black;
+    --sds-c-button-line-height : 2.3rem;
+    font-size: medium;
+}

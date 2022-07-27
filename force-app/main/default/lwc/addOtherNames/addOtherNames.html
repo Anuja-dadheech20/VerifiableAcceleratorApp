@@ -1,0 +1,80 @@
+<!--
+  @description       : 
+  @author            : Anuja Dadheech
+  @group             : 
+  @last modified on  : 07-25-2022
+  @last modified by  : Anuja Dadheech
+-->
+
+<template>
+  <!--Body of the component-->
+  <template for:each={otherNamesArrayCloned} for:item="each" for:index="index">
+    <div key={each.Id} style="margin-left: 6%">
+      <lightning-layout multiple-rows>
+        <lightning-layout-item
+          size="12"
+          small-device-size="12"
+          medium-device-size="6"
+          large-device-size="6"
+          class="slds-align_absolute-center"
+        >
+          <lightning-icon
+            class="slds-m-right_medium"
+            data-index={index}
+            icon-name="utility:clear"
+            alternative-text="Remove"
+            title="Remove"
+            size="x-small"
+            onclick={removeOtherName}
+          >
+          </lightning-icon>
+          <lightning-input
+            class="slds-m-around_small firstname"
+            data-index={index}
+            name="FirstName"
+            label="First Name"
+            type="text"
+            max-length="255"
+            value={each.verifiable__First_Name__c}
+            onchange={handleOtherNameChange}
+            style="width: 90%"
+            required
+          >
+          </lightning-input>
+        </lightning-layout-item>
+
+        <lightning-layout-item
+          size="12"
+          small-device-size="12"
+          medium-device-size="6"
+          large-device-size="6"
+          class="slds-align_absolute-center"
+        >
+          <lightning-input
+            class="slds-m-around_small lastname"
+            data-index={index}
+            name="LastName"
+            label="Last Name"
+            type="text"
+            max-length="255"
+            value={each.verifiable__Last_Name__c}
+            onchange={handleOtherNameChange}
+            style="width: 90%"
+            required
+          >
+          </lightning-input>
+        </lightning-layout-item>
+      </lightning-layout>
+    </div>
+  </template>
+
+  <!--Add Other Names-->
+  <lightning-button
+    label="Add Other Name"
+    title="Add Other Name"
+    onclick={addOtherName}
+    class="slds-m-around_small"
+    style="margin-left: 6%"
+  >
+  </lightning-button>
+</template>

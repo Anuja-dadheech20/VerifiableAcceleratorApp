@@ -1,0 +1,85 @@
+<!--
+  @description       : 
+  @author            : Anuja Dadheech
+  @group             : 
+  @last modified on  : 07-25-2022
+  @last modified by  : Anuja Dadheech
+-->
+<template>
+  <template if:true={loaded}>
+    <!--Heading of the screen-->
+    <div class="container slds-p-around_small">
+      <div class="slds-text-heading_large slds-p-around_small">
+        <b> DEA Registration </b>
+      </div>
+
+      <!--Body of the screen-->
+      <template
+        for:each={deaRegistrationArray}
+        for:item="each"
+        for:index="index"
+      >
+        <div key={each} class="slds-p-around_small">
+          <lightning-layout multiple-rows style="min-width: 48vw">
+            <lightning-layout-item
+              size="12"
+              small-device-size="12"
+              medium-device-size="8"
+              large-device-size="8"
+            >
+              <lightning-icon
+                class="slds-p-around_xx-small"
+                data-index={index}
+                onclick={removeDea}
+                icon-name="utility:clear"
+                alternative-text="Remove"
+                title="Remove"
+                size="x-small"
+              >
+              </lightning-icon>
+              <span>DEA</span>
+            </lightning-layout-item>
+            <lightning-layout-item
+              size="12"
+              small-device-size="12"
+              medium-device-size="8"
+              large-device-size="8"
+              class="slds-p-around_small"
+            >
+              <lightning-input
+                data-id={index}
+                data-index={index}
+                value={each.Name}
+                pattern="^[a-zA-Z]{2}[0-9]{7}$"
+                onchange={handleInputBoxChange}
+                type="text"
+                label="DEA Registration Number"
+                max-length="9"
+                message-when-pattern-mismatch="Invalid DEA format"
+              >
+              </lightning-input>
+            </lightning-layout-item>
+          </lightning-layout>
+        </div>
+      </template>
+
+      <!--Add DEA Button-->
+      <lightning-button
+        label="Add DEA"
+        title="Non-primary action"
+        onclick={addDea}
+        class="slds-p-around_large"
+      ></lightning-button>
+    </div>
+  </template>
+
+  <!--Spinner-->
+  <template if:false={loaded}>
+    <div style="height: 100px">
+      <lightning-spinner
+        alternative-text="Loading"
+        size="medium"
+      ></lightning-spinner>
+    </div>
+  </template>
+</template>

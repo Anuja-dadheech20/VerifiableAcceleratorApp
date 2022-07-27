@@ -1,0 +1,19 @@
+.container {
+    background: white;
+}
+.btn-black{
+    --sds-c-button-brand-color-background: rgb(29, 28, 28);
+    --sds-c-button-text-color: #f4f7f9;
+    --sds-c-button-brand-color-background-active : black;
+    --sds-c-button-brand-color-background-hover : black;
+    --sds-c-button-line-height : 2.3rem;
+    font-size: medium;
+}
+.btn-neutral{
+    --sds-c-button-text-color: black;
+    --sds-c-button-line-height : 2.3rem;
+    font-size: medium;
+}
+.card{
+    min-width: 100%;
+}

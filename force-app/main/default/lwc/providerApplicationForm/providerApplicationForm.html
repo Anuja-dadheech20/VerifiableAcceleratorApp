@@ -1,0 +1,235 @@
+<!--
+  @description       : 
+  @author            : Anuja Dadheech
+  @group             : 
+  @last modified on  : 07-25-2022
+  @last modified by  : Anuja Dadheech
+-->
+<template>
+  <lightning-layout multiple-rows class="container">
+    <!--Heading of the screen-->
+    <lightning-layout-item
+      class="slds-p-around_small"
+      size="12"
+      small-device-size="12"
+      medium-device-size="12"
+      large-device-size="12"
+      padding="around-small"
+    >
+      <div
+        class="slds-align_absolute-center slds-text-heading_medium slds-p-around_small"
+      >
+        <h2>VERIFIABLE CREDENTIALING APPLICATION</h2>
+      </div>
+    </lightning-layout-item>
+
+    <lightning-layout-item
+      size="12"
+      small-device-size="3"
+      medium-device-size="3"
+      large-device-size="3"
+    >
+    </lightning-layout-item>
+
+    <!--Progress Bar-->
+    <lightning-layout-item
+      size="12"
+      small-device-size="12"
+      medium-device-size="12"
+      large-device-size="6"
+    >
+      <div>
+        <lightning-progress-bar
+          value={progressBarValue}
+          size="small"
+        ></lightning-progress-bar>
+      </div>
+    </lightning-layout-item>
+
+    <lightning-layout-item
+      size="12"
+      small-device-size="3"
+      medium-device-size="3"
+      large-device-size="3"
+    >
+    </lightning-layout-item>
+
+    <!--Lightning Card comprising of child component screens according to the conditions applied-->
+    <lightning-layout-item
+      size="12"
+      small-device-size="12"
+      medium-device-size="12"
+      large-device-size="6"
+      class="slds-align_absolute-center slds-m-top_small"
+    >
+      <lightning-card class="card">
+        <!--Get Started Child Component-->
+        <template if:true={componentVisiblity.getStarted}>
+          <c-get-started
+            record-id={contactId}
+            onstepcompletionevent={handleRecordSave}
+            onrecordretreiveevent={handleRecordRetreival}
+          ></c-get-started>
+        </template>
+
+        <!--CAQH child Component-->
+        <template if:true={componentVisiblity.CAQH}>
+          <c-caqh
+            record-id={contactId}
+            onstepcompletionevent={handleRecordSave}
+            onrecordretreiveevent={handleRecordRetreival}
+          ></c-caqh>
+        </template>
+
+        <!--Basic Information Child Component-->
+        <template if:true={componentVisiblity.basic}>
+          <c-basic-information
+            record-id={contactId}
+            onstepcompletionevent={handleRecordSave}
+            onrecordretreiveevent={handleRecordRetreival}
+          ></c-basic-information>
+        </template>
+
+        <!--License Child Component-->
+        <template if:true={componentVisiblity.license}>
+          <c-license
+            record-id={contactId}
+            onstepcompletionevent={handleRecordSave}
+            onrecordretreiveevent={handleRecordRetreival}
+          ></c-license>
+        </template>
+
+        <!-- DEA Child Component-->
+        <template if:true={componentVisiblity.dea}>
+          <c-dea-registration
+            record-id={contactId}
+            onstepcompletionevent={handleRecordSave}
+            onrecordretreiveevent={handleRecordRetreival}
+          ></c-dea-registration>
+        </template>
+
+        <!--Specialty Child Component-->
+        <template if:true={componentVisiblity.specialties}>
+          <c-specialties
+            record-id={contactId}
+            onstepcompletionevent={handleRecordSave}
+            onrecordretreiveevent={handleRecordRetreival}
+          ></c-specialties>
+        </template>
+
+        <!--Education Child Component-->
+        <template if:true={componentVisiblity.education}>
+          <c-education
+            record-id={contactId}
+            onstepcompletionevent={handleRecordSave}
+            onrecordretreiveevent={handleRecordRetreival}
+          ></c-education>
+        </template>
+
+        <!--Training Child Component-->
+        <template if:true={componentVisiblity.training}>
+          <c-training
+            record-id={contactId}
+            onstepcompletionevent={handleRecordSave}
+            onrecordretreiveevent={handleRecordRetreival}
+          ></c-training>
+        </template>
+
+        <!--Work History Child Component-->
+        <template if:true={componentVisiblity.workHistory}>
+          <c-work-history
+            record-id={contactId}
+            onstepcompletionevent={handleRecordSave}
+            onrecordretreiveevent={handleRecordRetreival}
+          ></c-work-history>
+        </template>
+
+        <!--CV Child Component-->
+        <template if:true={componentVisiblity.cv}>
+          <c-c-V
+            record-id={contactId}
+            onstepcompletionevent={handleRecordSave}
+            onrecordretreiveevent={handleRecordRetreival}
+          ></c-c-V>
+        </template>
+
+        <!-- Liability Insurance Child Component -->
+        <template if:true={componentVisiblity.liabilityinsurance}>
+          <c-liability-insurance
+            record-id={contactId}
+            onstepcompletionevent={handleRecordSave}
+            onrecordretreiveevent={handleRecordRetreival}
+          ></c-liability-insurance>
+        </template>
+
+        <!-- Disclosure Questions Child Component -->
+        <template if:true={componentVisiblity.disclosurequestion}>
+          <c-disclosure-questions
+            record-id={contactId}
+            onstepcompletionevent={handleRecordSave}
+            onrecordretreiveevent={handleRecordRetreival}
+          ></c-disclosure-questions>
+        </template>
+
+        <template if:true={completeSetUp}>
+          <div
+            class="slds-align_absolute-center slds-p-around_xx-large"
+            style="display: flex; flex-direction: column"
+          >
+            <div class="slds-m-around_small">
+              <lightning-icon
+                icon-name="standard:task2"
+                size="large"
+              ></lightning-icon>
+            </div>
+
+            <div class="slds-text-color_success slds-m-around_small">
+              <h1 class="slds-text-heading_medium">
+                Thank you for filling up the Provider Application Form.
+              </h1>
+            </div>
+          </div>
+        </template>
+
+        <!--Footer Buttons-->
+        <template if:true={showFooterButtons}>
+          <div class="slds-clearfix slds-m-left_medium">
+            <template if:true={backButtonVisible}>
+              <div class="slds-float_left slds-p-around_medium">
+                <lightning-button
+                  class="btn-neutral"
+                  variant="neutral"
+                  onclick={handleBackEvent}
+                  label="Back"
+                  title="Back"
+                ></lightning-button>
+              </div>
+            </template>
+
+            <template if:true={continueButtonVisible}>
+              <div class="slds-float_left slds-p-around_medium">
+                <lightning-button
+                  class="btn-black"
+                  variant="brand"
+                  label="Continue"
+                  onclick={handleSaveEvent}
+                  title="Continue"
+                ></lightning-button>
+              </div>
+            </template>
+          </div>
+
+          <!--Verifiable Logo-->
+          <div class="slds-align_absolute-center slds-p-around_small">
+            <img
+              src={verifiableLogo}
+              alt="Powered by Verifiable logo"
+              class="footer-icon"
+              style="width: 15%; height: 15%"
+            />
+          </div>
+        </template>
+      </lightning-card>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>

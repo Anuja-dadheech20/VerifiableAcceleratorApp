@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Lightning Message Channel for communication between parent and child components.</description>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <description>Field which reflects the current name of the step. </description>
+        <fieldName>stepName</fieldName>
+    </lightningMessageFields>
+    <masterLabel>ProviderApplicationStepCompletion</masterLabel>
+</LightningMessageChannel>
