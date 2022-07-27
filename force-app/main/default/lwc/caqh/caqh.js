@@ -31,7 +31,7 @@ export default class Caqh extends LightningElement {
 
   connectedCallback() {
     this.subscribeToMessageChannel();
-    if (this.recordId !== undefined) {
+    if (this.recordId != undefined) {
       this.retreiveRecord();
     }
   }
@@ -45,11 +45,11 @@ export default class Caqh extends LightningElement {
     return [".pdf", ".png", ".docx"];
   }
 
-  // // Get the list of uploaded files
-  // handleUploadFinished(event) {
-  //   const uploadedFiles = event.detail.files;
-  //   alert("No. of files uploaded : " + uploadedFiles.length);
-  // }
+  // Get the list of uploaded files
+  handleUploadFinished(event) {
+    const uploadedFiles = event.detail.files;
+    alert("No. of files uploaded : " + uploadedFiles.length);
+  }
 
   /*Retrieves the object records */
   async retreiveRecord() {
@@ -61,15 +61,15 @@ export default class Caqh extends LightningElement {
         sObjectName: "Contact"
       });
       this.contact.caqhusername =
-        response.CAQH_Username__c !== undefined
+        response.CAQH_Username__c != undefined
           ? response.CAQH_Username__c
           : undefined;
       this.contact.caqhpassword =
-        response.CAQH_Password__c !== undefined
+        response.CAQH_Password__c != undefined
           ? response.CAQH_Password__c
           : undefined;
       this.contact.caqhId =
-        response.CAQH_ID__c !== undefined ? response.CAQH_ID__c : undefined;
+        response.CAQH_ID__c != undefined ? response.CAQH_ID__c : undefined;
       console.log("Response", response);
       this.loaded = true;
       this.dispatchEvent(
@@ -126,7 +126,7 @@ export default class Caqh extends LightningElement {
         StepCompletionEvent,
         (message) => {
           console.log(message);
-          if (message.stepName === "CAQH") {
+          if (message.stepName == "CAQH") {
             this.saveRecord();
           }
         },

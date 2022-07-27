@@ -2,17 +2,11 @@
  * @description       :
  * @author            : Anuja Dadheech
  * @group             :
- * @last modified on  : 07-26-2022
+ * @last modified on  : 07-25-2022
  * @last modified by  : Anuja Dadheech
  **/
-
 public with sharing class LiabilityInsuranceFileUploader {
-  // Static variable to save the object of the without sharing inner class
   private static SystemContext systemCtx = new SystemContext();
-
-  /**
-   * @description File Wrapper class
-   **/
   public class LiabilityFileWrapper {
     @AuraEnabled
     public String id;
@@ -30,9 +24,6 @@ public with sharing class LiabilityInsuranceFileUploader {
     public String contentDocumentLinkRecordId;
   }
 
-  /**
-   * @description Without Sharing Inner class
-   **/
   private without sharing class SystemContext {
     public List<SObject> queryRecords(String query) {
       System.debug(query);
@@ -61,20 +52,17 @@ public with sharing class LiabilityInsuranceFileUploader {
     }
   }
 
-  /**
-   *
-   * @description Deletes File
-   * @param recordIds (String) :  record Id to Delete
-   *
-   **/
   @AuraEnabled
   public static void deleteFiles(String recordIds) {
     try {
-      List<Id> parsedRecordIds = (List<Id>) JSON.deserialize(
+      List<String> parsedRecordIds = (List<String>) JSON.deserialize(
         recordIds,
-        List<Id>.class
+        List<String>.class
       );
       if (parsedRecordIds.size() > 0) {
+        for(Integer i = 0 ; i < parsedRecordIds.size(); i++){
+          parsedRecordIds[i] = ued.UserCryptoHelper.doDecrypt(parsedRecordIds[i]);
+        }
         systemCtx.deleteRecords(parsedRecordIds);
       }
     } catch (Exception e) {
@@ -82,15 +70,15 @@ public with sharing class LiabilityInsuranceFileUploader {
     }
   }
 
-  /**
-   * @description Get file details
-   * @param ids (String) : recordId to get files
-   * @return Wrapper : return respective record wrapper
-   **/
   @AuraEnabled
   public static List<LiabilityFileWrapper> getFiles(String ids) {
-    List<Id> liablityIds = (List<Id>) JSON.deserialize(ids, List<Id>.class);
-
+    List<String> liablityIds = (List<String>) JSON.deserialize(ids, List<String>.class);
+    Map<String,String> recordIdsMappedWithEncryptedIds = new Map<String,String>();
+    for(Integer i = 0 ; i < liablityIds.size(); i++){
+      String encryptedId = liablityIds[i];
+      liablityIds[i] = ued.UserCryptoHelper.doDecrypt(liablityIds[i]);
+      recordIdsMappedWithEncryptedIds.put(liablityIds[i],encryptedId);
+    }
     List<Sobject> records = systemCtx.queryRecordsWithListIds(
       'Select Id,ContentDocumentId,LinkedEntityId from ContentDocumentLink where LinkedEntityId IN :ids',
       liablityIds
@@ -117,23 +105,18 @@ public with sharing class LiabilityInsuranceFileUploader {
         contentDocumentId
       );
       LiabilityFileWrapper rec = new LiabilityFileWrapper();
-      rec.id = contentDocLinkRecord.LinkedEntityId;
-      rec.contentVersionId = (Id) contentVersions[i].get('Id');
+      rec.id =  recordIdsMappedWithEncryptedIds.get((String)contentDocLinkRecord.LinkedEntityId) != null ? recordIdsMappedWithEncryptedIds.get((String)contentDocLinkRecord.LinkedEntityId) : ued.UserCryptoHelper.doEncrypt((String)contentDocLinkRecord.LinkedEntityId);
+      rec.contentVersionId = ued.UserCryptoHelper.doEncrypt((String)contentVersions[i].get('Id')); 
       rec.title = (String) contentVersions[i].get('Title');
       Blob data = (Blob) contentVersions[i].get('VersionData');
       rec.versionData = EncodingUtil.base64Encode(data);
-      rec.contentDocumentId = contentDocumentId;
-      rec.contentDocumentLinkRecordId = contentDocLinkRecord.Id;
+      rec.contentDocumentId = ued.UserCryptoHelper.doEncrypt((String)contentDocumentId);
+      rec.contentDocumentLinkRecordId = ued.UserCryptoHelper.doEncrypt((String)contentDocLinkRecord.Id);
       rec.size = (Integer) contentVersions[i].get('ContentSize');
       result.add(rec);
     }
     return result;
   }
-
-  /**
-   * @description Upload files
-   * @param data (String)  : Data string
-   **/
   @AuraEnabled
   public static void uploadFiles(String data) {
     try {
@@ -142,6 +125,12 @@ public with sharing class LiabilityInsuranceFileUploader {
         List<LiabilityFileWrapper>.class
       );
       System.debug('34 -> ' + wrapperList);
+      for(Integer i = 0; i < wrapperList.size(); i++){
+        wrapperList[i].id = wrapperList[i].id != null ? ued.UserCryptoHelper.doDecrypt(wrapperList[i].id) : wrapperList[i].id;
+        wrapperList[i].contentVersionId = wrapperList[i].contentVersionId != null ? ued.UserCryptoHelper.doDecrypt(wrapperList[i].contentVersionId) : wrapperList[i].contentVersionId;
+        wrapperList[i].contentDocumentId = wrapperList[i].contentDocumentId != null ?  ued.UserCryptoHelper.doDecrypt(wrapperList[i].contentDocumentId) : wrapperList[i].contentDocumentId;
+        wrapperList[i].contentDocumentLinkRecordId = wrapperList[i].contentDocumentLinkRecordId != null ?  ued.UserCryptoHelper.doDecrypt(wrapperList[i].contentDocumentLinkRecordId) : wrapperList[i].contentDocumentLinkRecordId;
+      }
 
       List<ContentVersion> contentVersions = new List<ContentVersion>();
       for (Integer i = 0; i < wrapperList.size(); i++) {
@@ -161,15 +150,15 @@ public with sharing class LiabilityInsuranceFileUploader {
       for (Integer i = 0; i < wrapperList.size(); i++) {
         recordIdMappedWithContentDocument.put(wrapperList[i].Id, cvIds[i]);
       }
-      List<SObject> contentVersionsAfterUpsert = systemCtx.queryRecordsWithListIds(
+      List<SObject> contenVersionsAfterUpsert = systemCtx.queryRecordsWithListIds(
         'Select Id,ContentDocumentId from ContentVersion where Id IN :Ids ',
         cvIds
       );
       Map<Id, Id> convertListIntoMap = new Map<Id, Id>();
-      for (Integer i = 0; i < contentVersionsAfterUpsert.size(); i++) {
+      for (Integer i = 0; i < contenVersionsAfterUpsert.size(); i++) {
         convertListIntoMap.put(
-          (Id) contentVersionsAfterUpsert[i].get('Id'),
-          (Id) contentVersionsAfterUpsert[i].get('ContentDocumentId')
+          (Id) contenVersionsAfterUpsert[i].get('Id'),
+          (Id) contenVersionsAfterUpsert[i].get('ContentDocumentId')
         );
       }
 

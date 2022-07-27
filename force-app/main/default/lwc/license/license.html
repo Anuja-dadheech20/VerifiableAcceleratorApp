@@ -2,152 +2,88 @@
   @description       : 
   @author            : Anuja Dadheech
   @group             : 
-  @last modified on  : 07-25-2022
+  @last modified on  : 07-20-2022
   @last modified by  : Anuja Dadheech
 -->
 <template>
-  <template if:true={loaded}>
-    <!--Heading of the screen-->
-    <div class="container slds-p-around_small">
-      <div class="slds-text-heading_large slds-p-around_small">
-        <b> License </b>
-      </div>
-      <div>
-        <h3 class="slds-p-around_small">
-          Only one license can be a primary license.
-        </h3>
-      </div>
 
-      <!--Body of the screen-->
-      <template for:each={licenseArray} for:item="each" for:index="index">
-        <div key={each} class="slds-p-around_small">
-          <lightning-layout multiple-rows>
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="12"
-              large-device-size="12"
-              class="slds-align_absolute-left"
-            >
-              <lightning-icon
-                class="slds-p-around_x-small"
-                data-index={index}
-                icon-name="utility:clear"
-                alternative-text="Remove"
-                title="Remove"
-                size="x-small"
-                onclick={removeLicense}
-              >
-              </lightning-icon>
-              <span>License</span>
-            </lightning-layout-item>
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="6"
-              large-device-size="6"
-              class="slds-p-around_x-small"
-            >
-              <lightning-combobox
-                class="input"
-                data-id={index}
-                data-index={index}
-                name="License State"
-                label="License State"
-                placeholder="Select State"
-                options={StateList}
-                value={each.Jurisdiction_State__c}
-                onchange={handleInputBoxChange}
-                style="width: 90%"
-              >
-              </lightning-combobox>
-            </lightning-layout-item>
+    <template if:true={loaded}>
 
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="6"
-              large-device-size="6"
-              class="slds-p-around_x-small"
-            >
-              <lightning-input
-                class="input"
-                data-id={index}
-                data-index={index}
-                name="License Number"
-                label="License Number"
-                type="text"
-                max-length="255"
-                value={each.License_Number__c}
-                onchange={handleInputBoxChange}
-                style="width: 90%; left: 3%"
-              >
-              </lightning-input>
-            </lightning-layout-item>
+        <!--Heading of the screen-->
+        <div class="container slds-p-around_small">
+            <div class="slds-text-heading_large slds-p-around_small">
+                <b> License </b>
+            </div>
+            <div>
+                <h3 class="slds-p-around_small">Only one license can be a primary license.</h3>
+            </div>
 
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="6"
-              large-device-size="6"
-              class="slds-p-around_x-small"
-            >
-              <lightning-combobox
-                class="input"
-                data-id={index}
-                data-index={index}
-                name="LicenseType"
-                label="License Type"
-                placeholder="Select License Type"
-                options={LicenseType}
-                value={each.License_Type_ID__c}
-                onchange={handleInputBoxChange}
-                style="width: 90%"
-              >
-              </lightning-combobox>
-            </lightning-layout-item>
+            <!--Body of the screen-->
+            <template for:each={licenseArray} for:item="each" for:index="index">
 
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="12"
-              large-device-size="12"
-              class="slds-p-around_x-small"
-            >
-              <lightning-input
-                class="input"
-                data-index={index}
-                name="License checkbox"
-                label="Primary License"
-                type="checkbox"
-                checked={each.Primary_License__c}
-                onchange={handleInputBoxChange}
-                style="width: 90%"
-              >
-              </lightning-input>
-            </lightning-layout-item>
-          </lightning-layout>
+                <div key={each} class="slds-p-around_small">
+
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="12" class="slds-align_absolute-left">
+                            <lightning-icon class="slds-p-around_x-small" data-index={index} icon-name="utility:clear"
+                                alternative-text="Remove" title="Remove" size="x-small" onclick={removeLicense}>
+                            </lightning-icon>
+                            <span>License</span>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                            large-device-size="6" class="slds-p-around_x-small">
+                            <lightning-combobox class="input" data-id={index} data-index={index}
+                                name="License State" label="License State" placeholder="Select State"
+                                options={StateList} value={each.Jurisdiction_State__c} onchange={handleInputBoxChange}
+                                style="width:90%;">
+                            </lightning-combobox>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                            large-device-size="6" class="slds-p-around_x-small">
+                            <lightning-input class="input" data-id={index} data-index={index} name="License Number"
+                                label="License Number" type="text" max-length="255" value={each.License_Number__c}
+                                onchange={handleInputBoxChange} style="width:90%;left: 3%;">
+                            </lightning-input>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                            large-device-size="6" class="slds-p-around_x-small">
+                            <lightning-combobox class="input" data-id={index} data-index={index}
+                                name="LicenseType" label="License Type" placeholder="Select License Type"
+                                options={LicenseType} value={each.License_Type_ID__c} onchange={handleInputBoxChange}
+                                style="width:90%;">
+                            </lightning-combobox>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="12" class="slds-p-around_x-small">
+                            <lightning-input class="input" data-index={index}
+                                name="License checkbox" label="Primary License" type="checkbox"
+                                checked={each.Primary_License__c} onchange={handleInputBoxChange} style="width:90%;">
+                            </lightning-input>
+                        </lightning-layout-item>
+
+                    </lightning-layout>
+
+                </div>
+
+            </template>
+
+            <br>
+            <!--Add License Button-->
+            <lightning-button class="slds-p-around_medium" label="Add License" title="Add License" onclick={addLicenses}></lightning-button>
+
         </div>
-      </template>
 
-      <br />
-      <!--Add License Button-->
-      <lightning-button
-        class="slds-p-around_medium"
-        label="Add License"
-        title="Add License"
-        onclick={addLicenses}
-      ></lightning-button>
-    </div>
-  </template>
+    </template>
 
-  <!--Spinner-->
-  <template if:false={loaded}>
-    <div style="height: 100px">
-      <lightning-spinner
-        alternative-text="Loading"
-        size="medium"
-      ></lightning-spinner>
-    </div>
-  </template>
+    <!--Spinner-->
+    <template if:false={loaded}>
+        <div style="height: 100px;">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+
 </template>

@@ -2,14 +2,13 @@
   @description       : 
   @author            : Anuja Dadheech
   @group             : 
-  @last modified on  : 07-25-2022
+  @last modified on  : 07-22-2022
   @last modified by  : Anuja Dadheech
 -->
-
 <template>
   <!--Body of the component-->
   <template for:each={otherNamesArrayCloned} for:item="each" for:index="index">
-    <div key={each.Id} style="margin-left: 6%">
+    <div key={each} style="margin-left: 6%">
       <lightning-layout multiple-rows>
         <lightning-layout-item
           size="12"

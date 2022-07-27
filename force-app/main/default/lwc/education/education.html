@@ -2,210 +2,104 @@
   @description       : 
   @author            : ChangeMeIn@UserSettingsUnder.SFDoc
   @group             : 
-  @last modified on  : 07-25-2022
+  @last modified on  : 07-20-2022
   @last modified by  : Anuja Dadheech
 -->
 
 <template>
-  <template if:true={loaded}>
-    <!--Heading-->
-    <div class="container slds-p-around_small">
-      <div class="slds-text-heading_medium slds-p-around_small">
-        <b> Education &amp; Experience </b>
-      </div>
-      <div
-        class="slds-text-color_default slds-p-bottom_medium slds-p-top_medium slds-p-left_medium"
-      >
-        <h3><b class="slds-text-heading_small"> Education </b></h3>
-      </div>
 
-      <!--Body-->
-      <template for:each={educationArray} for:item="each" for:index="index">
-        <div key={each} class="slds-p-around_small">
-          <lightning-layout multiple-rows>
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="12"
-              large-device-size="12"
-              class="slds-align_absolute-left"
-            >
-              <lightning-icon
-                class="slds-p-around_xx-small"
-                data-index={index}
-                onclick={removeEducation}
-                icon-name="utility:clear"
-                alternative-text="Remove"
-                title="Remove"
-                size="x-small"
-              >
-              </lightning-icon>
-              <span>Education</span>
-            </lightning-layout-item>
+    <template if:true={loaded}>
 
-            <lightning-layout-item
-              class="slds-p-around_small"
-              size="12"
-              small-device-size="12"
-              medium-device-size="6"
-              large-device-size="6"
-            >
-              <lightning-combobox
-                style="width: 90%"
-                name="EducationType"
-                label="Education Type"
-                onchange={handleInputBoxChange}
-                data-index={index}
-                value={each.verifiable__GraduateType__c}
-                placeholder=""
-                options={EducationTypeList}
-              >
-              </lightning-combobox>
-            </lightning-layout-item>
+        <!--Heading-->
+        <div class="container slds-p-around_small">
+            <div class="slds-text-heading_medium slds-p-around_small">
+                <b> Education &amp; Experience </b>
+            </div>
+            <div class="slds-text-color_default  slds-p-bottom_medium slds-p-top_medium slds-p-left_medium">
+                <h3><b class="slds-text-heading_small"> Education </b></h3>
+            </div>
 
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="6"
-              large-device-size="6"
-              class="slds-p-around_small"
-            >
-              <lightning-input
-                style="width: 90%"
-                type="text"
-                label="Degree Awarded"
-                onchange={handleInputBoxChange}
-                data-index={index}
-                value={each.verifiable__Degree__c}
-                max-length="100"
-              ></lightning-input>
-            </lightning-layout-item>
+            <!--Body-->
+            <template for:each={educationArray} for:item="each" for:index="index">
+                <div key={each} class="slds-p-around_small">
 
-            <template if:false={each.otherSchool}>
-              <lightning-layout-item
-                size="12"
-                small-device-size="12"
-                medium-device-size="6"
-                large-device-size="6"
-                class="slds-p-around_small"
-              >
-                <!-- <lightning-combobox onchange={handleInputBoxChange} options={schoolsArray}
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="12" class="slds-align_absolute-left">
+                            <lightning-icon class="slds-p-around_xx-small" data-index={index} onclick={removeEducation}
+                                icon-name="utility:clear" alternative-text="Remove" title="Remove" size="x-small">
+                            </lightning-icon>
+                            <span>Education</span>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item class="slds-p-around_small" size="12" small-device-size="12"
+                            medium-device-size="6" large-device-size="6">
+                            <lightning-combobox style="width:90%;" name="EducationType" label="Education Type"
+                                onchange={handleInputBoxChange} data-index={index}
+                                value={each.verifiable__GraduateType__c} placeholder="" options={EducationTypeList}>
+                            </lightning-combobox>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                            large-device-size="6" class="slds-p-around_small">
+                            <lightning-input style="width:90%;" type="text" label="Degree Awarded"
+                                onchange={handleInputBoxChange} data-index={index} value={each.verifiable__Degree__c}
+                                max-length="100"></lightning-input>
+                        </lightning-layout-item>
+
+                        <template if:false={each.otherSchool}>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                                large-device-size="6" class="slds-p-around_small">
+                                <!-- <lightning-combobox onchange={handleInputBoxChange} options={schoolsArray}
                                     placeholder="Select School" name="schoolname" style="width:90%;" data-index={index}
                                     value={each.Name} label="Name of U.S/Canadian School" max-length="80">
                                 </lightning-combobox> -->
 
-                <div class="slds-form-element" style="width: 90%">
-                  <label class="slds-form-element__label" for="combobox-id-4"
-                    >Name of U.S/Canadian School</label
-                  >
-                  <div class="slds-form-element__control">
-                    <div class="slds-combobox_container">
-                      <div class={each.comboboxClass}>
-                        <template if:false={each.isSelected}>
-                          <div
-                            class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
-                            role="none"
-                          >
-                            <input
-                              type="text"
-                              data-index={index}
-                              oninput={searchHandler}
-                              onfocus={openDropdown}
-                              onblur={closeDropdown}
-                              class="slds-input slds-combobox__input"
-                              placeholder="Select School"
-                              role="combobox"
-                              aria-controls="listbox-id"
-                              aria-expanded="false"
-                              aria-haspopup="listbox"
-                              autocomplete="off"
-                            />
-                            <span
-                              class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right"
-                            >
-                              <lightning-icon
-                                icon-name="utility:search"
-                                alternative-text="Search"
-                                title="Search"
-                                size="x-small"
-                              ></lightning-icon>
-                            </span>
-                          </div>
-                        </template>
-                        <template if:true={each.isSelected}>
-                          <div
-                            class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
-                            role="none"
-                          >
-                            <button
-                              type="button"
-                              class="slds-input_faux slds-combobox__input slds-combobox__input-value"
-                            >
-                              <span class="slds-truncate" data-index={index}
-                                >{each.Name}</span
-                              >
-                            </button>
-                            <button
-                              onclick={handleRemoveSelected}
-                              data-index={index}
-                              class="slds-button slds-button_icon slds-input__icon slds-input__icon_right"
-                              title="Remove selected option"
-                            >
-                              <span>
-                                <lightning-icon
-                                  icon-name="utility:clear"
-                                  alternative-text="Clear"
-                                  title="Clear"
-                                  size="x-small"
-                                ></lightning-icon>
-                              </span>
-                            </button>
-                          </div>
-                        </template>
-                        <div
-                          id="listbox-id"
-                          class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
-                          role="listbox"
-                        >
-                          <ul
-                            class="slds-listbox slds-listbox_vertical"
-                            role="presentation"
-                          >
-                            <template
-                              for:each={filteredSchoolsArray}
-                              for:item="result"
-                            >
-                              <li
-                                key={result}
-                                role="presentation"
-                                class="slds-listbox__item"
-                                data-label="Name of U.S/Canadian School"
-                                data-value={result.value}
-                                data-index={index}
-                                data-schoolcode={result.schoolcode}
-                                onclick={handleInputBoxChange}
-                              >
-                                <div
-                                  class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_large"
-                                  role="option"
-                                >
-                                  <span class="slds-media__body">
-                                    <span
-                                      class="slds-listbox__option-text slds-listbox__option-text_entity"
-                                      >{result.label}</span
-                                    >
-                                  </span>
+                                <div class="slds-form-element" style="width:90%;">
+                                    <label class="slds-form-element__label" for="combobox-id-4" >Name of U.S/Canadian School</label>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-combobox_container">
+                                            <div class={each.comboboxClass} >
+                                                <template if:false={each.isSelected}>
+                                                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                                                        <input type="text" data-index={index} oninput={searchHandler} onfocus={openDropdown} onblur={closeDropdown} class="slds-input slds-combobox__input" placeholder="Select School" role="combobox"  aria-controls="listbox-id" aria-expanded="false" aria-haspopup="listbox" autocomplete="off"/>
+                                                        <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                                            <lightning-icon icon-name="utility:search" alternative-text="Search" title="Search" size="x-small"></lightning-icon>
+                                                        </span>
+                                                    </div>
+                                                </template>
+                                                <template if:true={each.isSelected} >
+                                                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                                                        <button type="button"  class="slds-input_faux slds-combobox__input slds-combobox__input-value">
+                                                          <span class="slds-truncate" data-index={index} >{each.Name}</span>
+                                                        </button>
+                                                        <button onclick={handleRemoveSelected} data-index={index} class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Remove selected option">
+                                                            <span>
+                                                                <lightning-icon  icon-name="utility:clear" alternative-text="Clear" title="Clear" size="x-small"></lightning-icon>
+                                                            </span>
+                                                        </button>
+                                                      </div>
+                                                </template> 
+                                                <div id="listbox-id" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" role="listbox">
+                                                    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                                        <template for:each={filteredSchoolsArray} for:item="result">
+                                                            <li key={result} role="presentation" class="slds-listbox__item" data-label="Name of U.S/Canadian School"
+                                                                data-value={result.value} data-index={index} data-schoolcode={result.schoolcode} onclick={handleInputBoxChange}>
+                                                                <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_large" role="option">
+                                                                    <span class="slds-media__body">
+                                                                        <span class="slds-listbox__option-text slds-listbox__option-text_entity">{result.label}</span>
+                                                                      </span>
+                                                                </div>
+                                                            </li>
+                                                        </template>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                              </li>
-                            </template>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
-                <!-- <lightning-layout multiple-rows>
+                                <!-- <lightning-layout multiple-rows>
                                     <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
                                     large-device-size="12">
                                         <div class="slds-form-element" style="width:90%;">
@@ -255,204 +149,117 @@
                                         </div>
                                     </lightning-layout-item>
                                 </lightning-layout> -->
-              </lightning-layout-item>
+
+                            </lightning-layout-item>
+                        </template>
+
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="12" class="slds-p-around_small">
+                            <lightning-input onchange={handleInputBoxChange} style="width:90%;" type="checkbox"
+                                label="Other (Not listed)" data-index={index} checked={each.otherSchool}>
+                            </lightning-input>
+                        </lightning-layout-item>
+
+                        <template if:true={each.otherSchool}>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                                large-device-size="6" class="slds-p-around_small">
+                                <lightning-input onchange={handleInputBoxChange} style="width:90%;" type="text"
+                                    label="Other Name of U.S/Canadian School" data-index={index} value={each.Name}
+                                    max-length="80"></lightning-input>
+                            </lightning-layout-item>
+                        </template>
+
+                        <template if:true={schoolCode}>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                            large-device-size="6" class="slds-p-around_small">
+                            <lightning-input disabled="true" data-index={index} value={each.verifiable__SchoolCode__c}
+                                style="width:90%;" type="text" label="School Code" max-length="100">
+                            </lightning-input>
+                        </lightning-layout-item>
+
+                        </template>
+                        
+
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="12" class="slds-p-around_small">
+                            <lightning-layout multiple-rows>
+
+                                <lightning-layout-item size="12" small-device-size="6" medium-device-size="6"
+                                    large-device-size="6">
+                                    <lightning-input onchange={handleInputBoxChange} type="date" data-index={index} data-id="StartDate"
+                                        value={each.verifiable__StartDate__c} label="Start Date" style="width:90%;" >
+                                    </lightning-input>
+                                </lightning-layout-item>
+
+                                <lightning-layout-item size="12" small-device-size="6" medium-device-size="6"
+                                    large-device-size="6">
+                                    <lightning-input onchange={handleInputBoxChange} type="date" label="End Date" 
+                                        data-index={index} value={each.verifiable__EndDate__c} style="width:90%;">
+                                    </lightning-input>
+                                </lightning-layout-item>
+
+                            </lightning-layout>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="12" class="slds-p-around_small">
+                            <lightning-radio-group onchange={handleInputBoxChange} name={index}
+                                label="Did you completed your professional education at this school ?"
+                                data-index={index} value={each.verifiable__Completed__c}
+                                options={professionalEducationOptions} type="radio"></lightning-radio-group>
+                        </lightning-layout-item>
+
+                    </lightning-layout>
+
+                </div>
+
             </template>
 
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="12"
-              large-device-size="12"
-              class="slds-p-around_small"
-            >
-              <lightning-input
-                onchange={handleInputBoxChange}
-                style="width: 90%"
-                type="checkbox"
-                label="Other (Not listed)"
-                data-index={index}
-                checked={each.otherSchool}
-              >
-              </lightning-input>
-            </lightning-layout-item>
 
-            <template if:true={each.otherSchool}>
-              <lightning-layout-item
-                size="12"
-                small-device-size="12"
-                medium-device-size="6"
-                large-device-size="6"
-                class="slds-p-around_small"
-              >
-                <lightning-input
-                  onchange={handleInputBoxChange}
-                  style="width: 90%"
-                  type="text"
-                  label="Other Name of U.S/Canadian School"
-                  data-index={index}
-                  value={each.Name}
-                  max-length="80"
-                ></lightning-input>
-              </lightning-layout-item>
-            </template>
+            <!--Add Education Button-->
+            <lightning-button label="Add Education" title="Add Education" onclick={addEducation}
+                class="slds-p-around_medium"></lightning-button>
 
-            <template if:true={schoolCode}>
-              <lightning-layout-item
-                size="12"
-                small-device-size="12"
-                medium-device-size="6"
-                large-device-size="6"
-                class="slds-p-around_small"
-              >
-                <lightning-input
-                  disabled="true"
-                  data-index={index}
-                  value={each.verifiable__SchoolCode__c}
-                  style="width: 90%"
-                  type="text"
-                  label="School Code"
-                  max-length="100"
-                >
-                </lightning-input>
-              </lightning-layout-item>
-            </template>
+            <hr>
 
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="12"
-              large-device-size="12"
-              class="slds-p-around_small"
-            >
-              <lightning-layout multiple-rows>
-                <lightning-layout-item
-                  size="12"
-                  small-device-size="6"
-                  medium-device-size="6"
-                  large-device-size="6"
-                >
-                  <lightning-input
-                    onchange={handleInputBoxChange}
-                    type="date"
-                    data-index={index}
-                    data-id="StartDate"
-                    value={each.verifiable__StartDate__c}
-                    label="Start Date"
-                    style="width: 90%"
-                  >
-                  </lightning-input>
-                </lightning-layout-item>
+            <lightning-input class="slds-p-around_medium" style="width:90%;" type="checkbox"
+                label="I have an ECFMG number" checked={ECFMGCheckbox} onchange={handleECFMGNumberChange}>
+            </lightning-input>
 
-                <lightning-layout-item
-                  size="12"
-                  small-device-size="6"
-                  medium-device-size="6"
-                  large-device-size="6"
-                >
-                  <lightning-input
-                    onchange={handleInputBoxChange}
-                    type="date"
-                    label="End Date"
-                    data-index={index}
-                    value={each.verifiable__EndDate__c}
-                    style="width: 90%"
-                  >
-                  </lightning-input>
-                </lightning-layout-item>
-              </lightning-layout>
-            </lightning-layout-item>
+            <lightning-layout multiple-rows>
+                <template if:true={ECFMGCheckbox}>
 
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="12"
-              large-device-size="12"
-              class="slds-p-around_small"
-            >
-              <lightning-radio-group
-                onchange={handleInputBoxChange}
-                name={index}
-                label="Did you completed your professional education at this school ?"
-                data-index={index}
-                value={each.verifiable__Completed__c}
-                options={professionalEducationOptions}
-                type="radio"
-              ></lightning-radio-group>
-            </lightning-layout-item>
-          </lightning-layout>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+                        class="slds-p-around_small">
+                        <lightning-input onchange={handleInputBoxChange} value={ECFMGCNumber} style="width:90%;"
+                            type="text" label="ECFMG Number" max-length="100">
+                        </lightning-input>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+                        class="slds-p-around_small">
+
+                        <lightning-input onchange={handleInputBoxChange} value={ECFMGCDate} style="width:90%;"
+                            type="date" label="Issue Date">
+                        </lightning-input>
+
+                    </lightning-layout-item>
+
+                </template>
+
+            </lightning-layout>
+
+            <hr>
+
         </div>
-      </template>
 
-      <!--Add Education Button-->
-      <lightning-button
-        label="Add Education"
-        title="Add Education"
-        onclick={addEducation}
-        class="slds-p-around_medium"
-      ></lightning-button>
+    </template>
 
-      <hr />
+    <!--Spinner-->
+    <template if:false={loaded}>
+        <div style="height: 100px;">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
 
-      <lightning-input
-        class="slds-p-around_medium"
-        style="width: 90%"
-        type="checkbox"
-        label="I have an ECFMG number"
-        checked={ECFMGCheckbox}
-        onchange={handleECFMGNumberChange}
-      >
-      </lightning-input>
-
-      <lightning-layout multiple-rows>
-        <template if:true={ECFMGCheckbox}>
-          <lightning-layout-item
-            size="12"
-            small-device-size="12"
-            medium-device-size="6"
-            large-device-size="6"
-            class="slds-p-around_small"
-          >
-            <lightning-input
-              onchange={handleInputBoxChange}
-              value={ECFMGCNumber}
-              style="width: 90%"
-              type="text"
-              label="ECFMG Number"
-              max-length="100"
-            >
-            </lightning-input>
-          </lightning-layout-item>
-
-          <lightning-layout-item
-            size="12"
-            small-device-size="12"
-            medium-device-size="6"
-            large-device-size="6"
-            class="slds-p-around_small"
-          >
-            <lightning-input
-              onchange={handleInputBoxChange}
-              value={ECFMGCDate}
-              style="width: 90%"
-              type="date"
-              label="Issue Date"
-            >
-            </lightning-input>
-          </lightning-layout-item>
-        </template>
-      </lightning-layout>
-
-      <hr />
-    </div>
-  </template>
-
-  <!--Spinner-->
-  <template if:false={loaded}>
-    <div style="height: 100px">
-      <lightning-spinner
-        alternative-text="Loading"
-        size="medium"
-      ></lightning-spinner>
-    </div>
-  </template>
 </template>

@@ -295,19 +295,19 @@ export default class LiabilityInsurance extends LightningElement {
         });
         console.log("133", parseRecords);
         const filesData = await getFiles({
-          Ids: JSON.stringify(liablityIds).toString()
+          ids: JSON.stringify(liablityIds).toString()
         });
         filesData.forEach((e) => {
-          const index = parseRecords.findIndex((k) => k.Id == e.Id);
+          const index = parseRecords.findIndex((k) => k.Id == e.id);
           if (index != -1) {
             parseRecords[index].fileData = {};
-            parseRecords[index].fileData.Title = e.Title;
+            parseRecords[index].fileData.Title = e.title;
             parseRecords[index].fileData.ContentDocumentId =
               e.contentDocumentId;
             parseRecords[index].fileData.ContentDocumentLinkRecordId =
               e.contentDocumentLinkRecordId;
             parseRecords[index].fileData.ContentVersionId = e.contentVersionId;
-            parseRecords[index].fileData.VersionData = e.VersionData;
+            parseRecords[index].fileData.VersionData = e.versionData;
             parseRecords[index].fileData.size = this.bytesToSize(e.size);
           }
         });

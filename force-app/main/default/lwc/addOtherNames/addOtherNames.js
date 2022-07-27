@@ -7,9 +7,11 @@ export default class AddOtherNames extends LightningElement {
 
   connectedCallback() {
     this.recordsToDelete = [];
+    console.log("9", this.otherNamesArray);
     this.otherNamesArrayCloned = JSON.parse(
       JSON.stringify(this.otherNamesArray)
     );
+    console.log("10", this.otherNamesArrayCloned);
     this.dispatchEvent(
       new CustomEvent("addothername", {
         detail: { records: this.otherNamesArrayCloned }
@@ -20,10 +22,10 @@ export default class AddOtherNames extends LightningElement {
   /*Handles the onchange of every input fields */
   handleOtherNameChange(event) {
     const index = event.currentTarget.dataset.index;
-    if (event.target.label === "First Name") {
+    if (event.target.label == "First Name") {
       this.otherNamesArrayCloned[index].verifiable__First_Name__c =
         event.target.value;
-    } else if (event.target.label === "Last Name") {
+    } else if (event.target.label == "Last Name") {
       this.otherNamesArrayCloned[index].verifiable__Last_Name__c =
         event.target.value;
     }
@@ -31,11 +33,13 @@ export default class AddOtherNames extends LightningElement {
 
   /*Invokes on click of Add Other Name Button */
   addOtherName() {
+    //this.otherNamesArrayCloned = JSON.parse(JSON.stringify(this.otherNamesArrayCloned));
     this.otherNamesArrayCloned.push({
       Id: "",
       verifiable__First_Name__c: "",
       verifiable__Last_Name__c: ""
     });
+    console.log(this.otherNamesArrayCloned);
     this.otherNamesArray = this.otherNamesArrayCloned;
     this.dispatchEvent(
       new CustomEvent("addothername", {
@@ -47,10 +51,12 @@ export default class AddOtherNames extends LightningElement {
   /*Invokes on click of cross icon to remove the particular record */
   removeOtherName(event) {
     let index = event.currentTarget.dataset.index;
-    if (this.otherNamesArrayCloned[index].Id !== "") {
+    if (this.otherNamesArrayCloned[index].Id != "") {
       this.recordsToDelete.push(this.otherNamesArrayCloned[index].Id);
     }
+    console.log("37", this.otherNamesArrayCloned);
     this.otherNamesArrayCloned.splice(index, 1);
+    console.log("43", this.otherNamesArrayCloned);
     this.otherNamesArray = this.otherNamesArrayCloned;
     this.dispatchEvent(
       new CustomEvent("removeothername", {
@@ -66,11 +72,11 @@ export default class AddOtherNames extends LightningElement {
     let aliasArr = [];
     for (let i = 0; i < firstName.length; i++) {
       let recId =
-        this.otherNamesArrayCloned[i].Id !== ""
+        this.otherNamesArrayCloned[i].Id != ""
           ? this.otherNamesArrayCloned[i].Id
           : undefined;
       let aliasObj =
-        recId !== undefined
+        recId != undefined
           ? {
               Id: recId,
               verifiable__First_Name__c: firstName[i].value,
@@ -81,19 +87,20 @@ export default class AddOtherNames extends LightningElement {
               verifiable__Last_Name__c: lastName[i].value
             };
       aliasArr.push(aliasObj);
+      console.log(aliasArr);
       if (
-        firstName[i].value === "" ||
+        firstName[i].value == "" ||
         firstName[i].value == null ||
-        firstName[i].value === undefined
+        firstName[i].value == undefined
       ) {
         firstName[i].focus();
         firstName[i].reportValidity();
         return { validated: false };
       }
       if (
-        lastName[i].value === "" ||
+        lastName[i].value == "" ||
         lastName[i].value == null ||
-        lastName[i].value === undefined
+        lastName[i].value == undefined
       ) {
         lastName[i].focus();
         lastName[i].reportValidity();

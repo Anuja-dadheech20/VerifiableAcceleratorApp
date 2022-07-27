@@ -2,185 +2,93 @@
   @description       : 
   @author            : Anuja Dadheech
   @group             : 
-  @last modified on  : 07-25-2022
+  @last modified on  : 07-20-2022
   @last modified by  : Anuja Dadheech
 -->
 <template>
-  <template if:true={loaded}>
-    <!--Heading of the screen-->
-    <div class="container slds-p-around_small">
-      <div class="slds-text-heading_large slds-p-around_small">
-        <b> Training </b>
-      </div>
 
-      <!--Body of the screen-->
-      <template for:each={trainingArray} for:item="each" for:index="index">
-        <div key={each} class="slds-p-around_small">
-          <lightning-layout multiple-rows>
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="12"
-              large-device-size="12"
-            >
-              <lightning-icon
-                class="slds-p-around_xx-small"
-                data-index={index}
-                icon-name="utility:clear"
-                alternative-text="Remove"
-                title="Remove"
-                size="x-small"
-                onclick={removeTraining}
-              >
-              </lightning-icon>
-              <span>Training</span>
-            </lightning-layout-item>
+    <template if:true={loaded}>
 
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="6"
-              large-device-size="6"
-              class="slds-p-around_x-small"
-            >
-              <lightning-combobox
-                class="input"
-                data-index={index}
-                label="Training Type"
-                value={each.verifiable__TrainingType__c}
-                placeholder="Select Training Type"
-                options={TrainingTypeList}
-                onchange={handleInputBoxChange}
-                style="width: 85%"
-              >
-              </lightning-combobox>
-            </lightning-layout-item>
+        <!--Heading of the screen-->
+        <div class="container slds-p-around_small">
+            <div class="slds-text-heading_large slds-p-around_small">
+                <b> Training </b>
+            </div>
 
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="6"
-              large-device-size="6"
-              class="slds-p-around_x-small"
-            ></lightning-layout-item>
+            <!--Body of the screen-->
+            <template for:each={trainingArray} for:item="each" for:index="index">
 
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="6"
-              large-device-size="6"
-              class="slds-p-around_x-small"
-            >
-              <lightning-input
-                class="input"
-                data-index={index}
-                type="text"
-                label="Institution/Hospital Name"
-                max-length="80"
-                value={each.Name}
-                onchange={handleInputBoxChange}
-                style="width: 90%"
-              ></lightning-input>
-            </lightning-layout-item>
+                <div key={each} class="slds-p-around_small">
 
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="6"
-              large-device-size="6"
-              class="slds-p-around_x-small"
-            >
-              <lightning-input
-                class="input"
-                data-index={index}
-                type="text"
-                label="Affiliated School"
-                max-length="100"
-                value={each.verifiable__SchoolName__c}
-                onchange={handleInputBoxChange}
-                style="width: 90%"
-              ></lightning-input>
-            </lightning-layout-item>
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+                            <lightning-icon class="slds-p-around_xx-small" data-index={index} icon-name="utility:clear"
+                                alternative-text="Remove" title="Remove" size="x-small" onclick={removeTraining}>
+                            </lightning-icon>
+                            <span>Training</span>
+                        </lightning-layout-item>
 
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="3"
-              large-device-size="3"
-              class="slds-p-around_x-small"
-            >
-              <lightning-input
-                class="input"
-                data-id="StartDate"
-                data-index={index}
-                type="date"
-                label="Start Date"
-                value={each.verifiable__StartDate__c}
-                onchange={handleInputBoxChange}
-                style="width: 80%"
-              >
-              </lightning-input>
-            </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                            large-device-size="6" class="slds-p-around_x-small">
+                           
+                            <lightning-combobox class="input" data-index={index} label="Training Type"
+                                value={each.verifiable__TrainingType__c} placeholder="Select Training Type" options={TrainingTypeList}
+                                onchange={handleInputBoxChange} style="width:85%;">
+                            </lightning-combobox>
+                        </lightning-layout-item>
 
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="3"
-              large-device-size="3"
-              class="slds-p-around_x-small"
-            >
-              <lightning-input
-                class="input"
-                data-index={index}
-                type="date"
-                label="End Date"
-                value={each.verifiable__EndDate__c}
-                onchange={handleInputBoxChange}
-                style="width: 80%"
-              >
-              </lightning-input>
-            </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                        large-device-size="6" class="slds-p-around_x-small"></lightning-layout-item>
 
-            <lightning-layout-item
-              size="12"
-              small-device-size="12"
-              medium-device-size="12"
-              large-device-size="12"
-              class="slds-p-around_x-small"
-            >
-              <lightning-radio-group
-                class="input"
-                data-index={index}
-                name={index}
-                label="Did you complete this training program at this institution?"
-                options={options}
-                value={each.verifiable__Completed__c}
-                type="radio"
-                onchange={handleInputBoxChange}
-              ></lightning-radio-group>
-            </lightning-layout-item>
-          </lightning-layout>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                            large-device-size="6" class="slds-p-around_x-small">
+                            <lightning-input class="input" data-index={index} type="text"
+                                label="Institution/Hospital Name" max-length="80" value={each.Name} onchange={handleInputBoxChange} style="width:90%;"></lightning-input>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                            large-device-size="6" class="slds-p-around_x-small">
+                            <lightning-input class="input" data-index={index} type="text"
+                                label="Affiliated School" max-length="100" value={each.verifiable__SchoolName__c} onchange={handleInputBoxChange} style="width:90%;"></lightning-input>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="3"
+                            large-device-size="3" class="slds-p-around_x-small">                                
+                                    <lightning-input class="input" data-id="StartDate" data-index={index} type="date" label="Start Date" value={each.verifiable__StartDate__c} onchange={handleInputBoxChange} style="width:80%;">
+                                    </lightning-input>
+                        </lightning-layout-item>
+                                
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="3"
+                            large-device-size="3" class="slds-p-around_x-small"> 
+                                    <lightning-input class="input" data-index={index} type="date" label="End Date" value={each.verifiable__EndDate__c} onchange={handleInputBoxChange} style="width:80%;">
+                                    </lightning-input>    
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="12" class="slds-p-around_x-small">
+                            <lightning-radio-group class="input" data-index={index} name={index}
+                                label="Did you complete this training program at this institution?" options={options}
+                                value={each.verifiable__Completed__c} type="radio" onchange={handleInputBoxChange}></lightning-radio-group>
+                        </lightning-layout-item>
+
+                    </lightning-layout>
+                </div>
+            </template>
+            <hr>
+
+            <!--Add Training Button-->
+            <lightning-button label="Add Training" title="Add Training" onclick={addTraining}
+                class="slds-p-around_medium"></lightning-button>
+
         </div>
-      </template>
-      <hr />
 
-      <!--Add Training Button-->
-      <lightning-button
-        label="Add Training"
-        title="Add Training"
-        onclick={addTraining}
-        class="slds-p-around_medium"
-      ></lightning-button>
-    </div>
-  </template>
+    </template>
 
-  <!--Spinner-->
-  <template if:false={loaded}>
-    <div style="height: 100px">
-      <lightning-spinner
-        alternative-text="Loading"
-        size="medium"
-      ></lightning-spinner>
-    </div>
-  </template>
+    <!--Spinner-->
+    <template if:false={loaded}>
+        <div style="height: 100px;">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+
 </template>

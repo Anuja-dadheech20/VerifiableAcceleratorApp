@@ -85,6 +85,7 @@ export default class DisclosureQuestions extends LightningElement {
               })
             );
             flag = false;
+            return;
           } else {
             let parsedObject = { ...e };
             // delete parsedObject.Description;

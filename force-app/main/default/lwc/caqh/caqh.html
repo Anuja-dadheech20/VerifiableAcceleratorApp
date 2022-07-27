@@ -2,11 +2,13 @@
   @description       : 
   @author            : Anuja Dadheech
   @group             : 
-  @last modified on  : 07-25-2022
+  @last modified on  : 07-18-2022
   @last modified by  : Anuja Dadheech
 -->
 <template>
+
   <template if:true={loaded}>
+
     <!--Heading of the screen-->
     <div class="container slds-p-around_small">
       <div class="slds-text-heading_large slds-p-around_small">
@@ -15,125 +17,57 @@
 
       <!--Body of the screen-->
       <lightning-layout multiple-rows>
-        <lightning-layout-item
-          size="12"
-          small-device-size="12"
-          medium-device-size="12"
-          large-device-size="12"
-          padding="around-small"
-        >
+
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12"
+          padding="around-small">
           <div>
             <h3 class="slds-p-around_small">
               We use your CAQH ProView profile to collect the information
               required for your application and screening process.
             </h3>
 
-            <h3 class="slds-p-around_small">
-              Don't have a CAQH ProView profile?
-              <a
-                target="_blank"
-                href="https://proview.caqh.org/PR/Registration"
-              >
-                Sign up for a free account</a
-              >
-            </h3>
+            <h3 class="slds-p-around_small">Don't have a CAQH ProView profile? <a target="_blank" href="https://proview.caqh.org/PR/Registration">  Sign up for a free account</a></h3>
           </div>
         </lightning-layout-item>
 
-        <lightning-layout-item
-          size="12"
-          small-device-size="12"
-          medium-device-size="12"
-          large-device-size="12"
-          padding="around-small"
-        >
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12"
+          padding="around-small">
           <div class="slds-p-around_small bg-color-blue">
             <h3>
-              <lightning-icon
-                class="slds-p-around_xx-small"
-                icon-name="utility:macros"
-                size="xx-small"
-              >
+              <lightning-icon class="slds-p-around_xx-small" icon-name="utility:macros" size="xx-small">
               </lightning-icon>
               Before you Begin, make sure your CAQH profile has been attested to
-              within the last 7 days .
-              <a
-                target="_blank"
-                href="https://uploads-ssl.webflow.com/5f274600ac3de0cf25b08be9/6080bc3991faa2c3c2d1fba3_Quick%20Guide%20to%20Reattesting%20CAQH.pdf"
-              >
-                Learn How</a
-              >
+              within the last 7 days . <a target="_blank"
+                href="https://uploads-ssl.webflow.com/5f274600ac3de0cf25b08be9/6080bc3991faa2c3c2d1fba3_Quick%20Guide%20to%20Reattesting%20CAQH.pdf"> Learn
+                How</a>
             </h3>
           </div>
         </lightning-layout-item>
 
         <template if:false={defaultCheckBoxValue}>
-          <lightning-layout-item
-            size="12"
-            class="slds-align_absolute-center"
-            small-device-size="12"
-            medium-device-size="6"
-            large-device-size="6"
-            padding="around-small"
-          >
-            <lightning-input
-              class="slds-m-around_xx-small input"
-              name="CAQH Username"
-              label="CAQH Username"
-              type="text"
-              max-length="255"
-              value={contact.caqhusername}
-              style="width: 90%"
-              message-when-too-long="Text Limit exceeded"
-            >
+          <lightning-layout-item size="12" class="slds-align_absolute-center" small-device-size="12"
+            medium-device-size="6" large-device-size="6" padding="around-small">
+            <lightning-input class="slds-m-around_xx-small input" name="CAQH Username" label="CAQH Username" type="text"
+              max-length="255" value={contact.caqhusername} style="width: 90%" message-when-too-long="Text Limit exceeded">
             </lightning-input>
           </lightning-layout-item>
 
-          <lightning-layout-item
-            size="12"
-            class="slds-align_absolute-center"
-            small-device-size="12"
-            medium-device-size="6"
-            large-device-size="6"
-            padding="around-small"
-          >
-            <lightning-input
-              class="slds-m-around_xx-small input"
-              label="CAQH Password"
-              type="password"
-              value={contact.caqhpassword}
-              max-length="255"
-              style="width: 90%"
-            >
+          <lightning-layout-item size="12" class="slds-align_absolute-center" small-device-size="12"
+            medium-device-size="6" large-device-size="6" padding="around-small">
+            <lightning-input class="slds-m-around_xx-small input" label="CAQH Password" type="password"
+              value={contact.caqhpassword} max-length="255" style="width: 90%">
             </lightning-input>
           </lightning-layout-item>
 
-          <lightning-layout-item
-            size="12"
-            class="slds-align_absolute-left"
-            small-device-size="12"
-            medium-device-size="6"
-            large-device-size="6"
-            padding="around-small"
-          >
-            <lightning-input
-              class="slds-m-around_xxx-small input"
-              label="CAQH ID"
-              type="text"
-              max-length="255"
-              value={contact.caqhId}
-              style="width: 90%; left: 4%"
-            >
+          <lightning-layout-item size="12" class="slds-align_absolute-left" small-device-size="12"
+            medium-device-size="6" large-device-size="6" padding="around-small">
+            <lightning-input class="slds-m-around_xxx-small input" label="CAQH ID" type="text" max-length="255"
+              value={contact.caqhId} style="width: 90%; left: 4%">
             </lightning-input>
           </lightning-layout-item>
 
-          <lightning-layout-item
-            size="12"
-            small-device-size="12"
-            medium-device-size="12"
-            large-device-size="12"
-            padding="around-small"
-          >
+          <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12"
+            padding="around-small">
             <div>
               <h3 class="slds-p-around_small slds-text-color_weak">
                 Your information is secure and only used to collect the required
@@ -195,18 +129,20 @@
                         </lightning-button>
                     </div>
                 </lightning-layout-item>-->
+
         </template>
+
       </lightning-layout>
+
     </div>
+
   </template>
 
   <!--Spinner-->
   <template if:false={loaded}>
-    <div style="height: 100px">
-      <lightning-spinner
-        alternative-text="Loading"
-        size="medium"
-      ></lightning-spinner>
+    <div style="height: 100px;">
+      <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
     </div>
   </template>
+
 </template>

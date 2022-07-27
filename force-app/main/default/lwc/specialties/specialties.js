@@ -32,65 +32,6 @@ export default class Specialties extends LightningElement {
   @wire(MessageContext)
   messageContext;
 
-  // Board Certification Name field JSON
-  // get BoardCertificationNames() {
-  //     return [
-  //         { label: "American Board of Medical Specialties", value: "American Board of Medical Specialties" },
-  //         { label: "National Board for Certified Counselors", value: "National Board for Certified Counselors" },
-  //         { label: "American Board of Clinical Social Work", value: "American Board of Clinical Social Work" },
-  //         { label: "American Speech-Language-Hearing Association", value: "American Speech-Language-Hearing Association" },
-  //         { label: "American Nurses Credentialing Center", value: "American Nurses Credentialing Center" },
-  //         { label: "American Academy of Nurse Practitioners", value: "American Academy of Nurse Practitioners" },
-  //         { label: "American Osteopathic Association", value: "American Osteopathic Association" },
-  //         { label: "American Medical Association", value: "American Medical Association" },
-  //         { label: "National Board of Certification and Recertification for Nurse Anesthetists", value: "National Board of Certification and Recertification for Nurse Anesthetists" },
-  //         { label: "American Association of Critical Care Nurses", value: "American Association of Critical Care Nurses" },
-  //         { label: "American Midwifery Certification Board", value: "American Midwifery Certification Board" },
-  //         { label: "American Board of Podiatric Medicine", value: "American Board of Podiatric Medicine" },
-  //         { label: "American Board of Oral Implantology", value: "American Board of Oral Implantology" },
-  //         { label: "American Board of Oral Medicine", value: "American Board of Oral Medicine" },
-  //         { label: "American Board of Orofacial Pain", value: "American Board of Orofacial Pain" },
-  //         { label: "American Dental Board of Anesthesiology", value: "American Dental Board of Anesthesiology" },
-  //         { label: "American Board of Dental Public Health", value: "American Board of Dental Public Health" },
-  //         { label: "American Board of Pediatric Dentistry", value: "American Board of Pediatric Dentistry" },
-  //         { label: "American Board of Periodontology", value: "American Board of Periodontology" },
-  //         { label: "American Board of Internal Medicine", value: "American Board of Internal Medicine" },
-  //         { label: "National Commission on Certification of Physician Assistants", value: "National Commission on Certification of Physician Assistants" },
-  //         { label: "American Board of Allergy and Immunology", value: "American Board of Allergy and Immunology" },
-  //         { label: "American Board of Anesthesiology", value: "American Board of Anesthesiology" },
-  //         { label: "American Board of Colon and Rectal Surgery", value: "American Board of Colon and Rectal Surgery" },
-  //         { label: "American Board of Dermatology", value: "American Board of Dermatology" },
-  //         { label: "American Board of Emergency Medicine", value: "American Board of Emergency Medicine" },
-  //         { label: "American Board of Family Medicine", value: "American Board of Family Medicine" },
-  //         { label: "American Board of Genetics and Genomics", value: "American Board of Genetics and Genomics" },
-  //         { label: "American Board of Neurological Surgery", value: "American Board of Neurological Surgery" },
-  //         { label: "American Board of Nuclear Medicine", value: "American Board of Nuclear Medicine" },
-  //         { label: "American Board of Obstetrics and Gynecology", value: "American Board of Obstetrics and Gynecology" },
-  //         { label: "American Board of Ophthalmology", value: "American Board of Ophthalmology" },
-  //         { label: "American Board of Orthopaedic Surgery", value: "American Board of Orthopaedic Surgery" },
-  //         { label: "American Board of Otolaryngology - Head and Neck Surgery", value: "American Board of Otolaryngology - Head and Neck Surgery" },
-  //         { label: "American Board of Pathology", value: "American Board of Pathology" },
-  //         { label: "American Board of Pediatrics", value: "American Board of Pediatrics" },
-  //         { label: "American Board of Physical Medicine and Rehabilitation", value: "American Board of Physical Medicine and Rehabilitation" },
-  //         { label: "American Board of Plastic Surgery", value: "American Board of Plastic Surgery" },
-  //         { label: "American Board of Preventive Medicine", value: "American Board of Preventive Medicine" },
-  //         { label: "American Board of Professional Psychology", value: "American Board of Professional Psychology" },
-  //         { label: "American Board of Psychiatry and Neurology", value: "American Board of Psychiatry and Neurology" },
-  //         { label: "American Board of Radiology", value: "American Board of Radiology" },
-  //         { label: "American Board of Surgery", value: "American Board of Surgery" },
-  //         { label: "American Board of Thoracic Surgery", value: "American Board of Thoracic Surgery" },
-  //         { label: "American Board of Urology", value: "American Board of Urology" },
-  //         { label: "American Optometric Association", value: "American Optometric Association" },
-  //         { label: "Association of Social Work Boards", value: "Association of Social Work Boards" },
-  //         { label: "American Board of Foot and Ankle Surgery", value: "American Board of Foot and Ankle Surgery" },
-  //         { label: "AMERICAN BOARD OF ORAL &amp; MAXILLOFACIAL PATHOLOGY", value: "AMERICAN BOARD OF ORAL &amp; MAXILLOFACIAL PATHOLOGY" },
-  //         { label: "AMERICAN BOARD OF ORAL &amp; MAXILLOFACIAL SURGERY", value: "AMERICAN BOARD OF ORAL &amp; MAXILLOFACIAL SURGERY" },
-  //         { label: "AMERICAN BOARD OF ORTHODONTICS", value: "AMERICAN BOARD OF ORTHODONTICS" },
-  //         { label: "AMERICAN BOARD OF ENDODONTICS", value: "AMERICAN BOARD OF ENDODONTICS" },
-  //         { label: "AMERICAN BOARD OF PROSTHODONTICS", value: "AMERICAN BOARD OF PROSTHODONTICS" }
-  //     ];
-  // }
-
   connectedCallback() {
     /*Static Resource call for Board Certification combobox field */
     let request = new XMLHttpRequest();

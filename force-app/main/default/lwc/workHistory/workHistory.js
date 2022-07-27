@@ -292,11 +292,11 @@ export default class WorkHistory extends LightningElement {
             e.Id != ""
               ? e
               : {
-                  verifiable__Type__c: e.verifiable__Type__c,
-                  verifiable__StartDate__c: e.verifiable__StartDate__c,
-                  verifiable__EndDate__c: e.verifiable__EndDate__c,
-                  verifiable__GapExplanation__c: e.verifiable__GapExplanation__c
-                };
+                verifiable__Type__c: e.verifiable__Type__c,
+                verifiable__StartDate__c: e.verifiable__StartDate__c,
+                verifiable__EndDate__c: e.verifiable__EndDate__c,
+                verifiable__GapExplanation__c: e.verifiable__GapExplanation__c
+              };
           dataProcessObject.verifiable__Provider__c = !(
             e.Id == "" &&
             e.verifiable__StartDate__c == undefined &&
@@ -310,22 +310,22 @@ export default class WorkHistory extends LightningElement {
             e.Id != ""
               ? e
               : {
-                  verifiable__Type__c: e.verifiable__Type__c,
-                  Name: e.Name,
-                  verifiable__JobTitle__c: e.verifiable__JobTitle__c,
-                  verifiable__StartDate__c: e.verifiable__StartDate__c,
-                  verifiable__EndDate__c: e.verifiable__EndDate__c,
-                  verifiable__IsCurrentEmployer__c:
-                    e.verifiable__IsCurrentEmployer__c,
-                  verifiable__AddressLine1__c: e.verifiable__AddressLine1__c,
-                  verifiable__AddressLine2__c: e.verifiable__AddressLine2__c,
-                  verifiable__AddressCity__c: e.verifiable__AddressCity__c,
-                  verifiable__AddressState__c: e.verifiable__AddressState__c,
-                  verifiable__AddressZip__c: e.verifiable__AddressZip__c,
-                  verifiable__DepartureReason__c:
-                    e.verifiable__DepartureReason__c,
-                  verifiable__GapExplanation__c: e.verifiable__GapExplanation__c
-                };
+                verifiable__Type__c: e.verifiable__Type__c,
+                Name: e.Name,
+                verifiable__JobTitle__c: e.verifiable__JobTitle__c,
+                verifiable__StartDate__c: e.verifiable__StartDate__c,
+                verifiable__EndDate__c: e.verifiable__EndDate__c,
+                verifiable__IsCurrentEmployer__c:
+                  e.verifiable__IsCurrentEmployer__c,
+                verifiable__AddressLine1__c: e.verifiable__AddressLine1__c,
+                verifiable__AddressLine2__c: e.verifiable__AddressLine2__c,
+                verifiable__AddressCity__c: e.verifiable__AddressCity__c,
+                verifiable__AddressState__c: e.verifiable__AddressState__c,
+                verifiable__AddressZip__c: e.verifiable__AddressZip__c,
+                verifiable__DepartureReason__c:
+                  e.verifiable__DepartureReason__c,
+                verifiable__GapExplanation__c: e.verifiable__GapExplanation__c
+              };
           dataProcessObject.verifiable__Provider__c = !(
             e.Id == "" &&
             e.verifiable__Type__c == "" &&
@@ -344,9 +344,11 @@ export default class WorkHistory extends LightningElement {
             ? this.recordId
             : undefined;
         }
-        // if(!(e.Id == "" && e.verifiable__Type__c == '' && e.Name == '' && e.verifiable__JobTitle__c == '' && e.verifiable__StartDate__c == undefined && e.verifiable__EndDate__c == undefined && e.verifiable__IsCurrentEmployer__c == false && e.verifiable__AddressLine1__c == '' && e.verifiable__AddressLine2__c == '' &&  e.verifiable__AddressCity__c == '' && e.verifiable__AddressState__c == '' && e.verifiable__AddressZip__c == '' && e.verifiable__DepartureReason__c == '' && e.verifiable__GapExplanation__c == '')){
+
+        if(!(e.Id == "" && e.verifiable__Type__c == '' && e.Name == '' && e.verifiable__JobTitle__c == '' && e.verifiable__StartDate__c == undefined && e.verifiable__EndDate__c == undefined && e.verifiable__IsCurrentEmployer__c == false && e.verifiable__AddressLine1__c == '' && e.verifiable__AddressLine2__c == '' &&  e.verifiable__AddressCity__c == '' && e.verifiable__AddressState__c == '' && e.verifiable__AddressZip__c == '' && e.verifiable__DepartureReason__c == '' && e.verifiable__GapExplanation__c == '')){
+          recordArray.push(dataProcessObject);
+        }
         // dataProcessObject.verifiable__Provider__c = this.recordId;
-        recordArray.push(dataProcessObject);
       });
       console.log("581", recordArray);
       if (flag) {

@@ -2,71 +2,53 @@
   @description       : 
   @author            : Anuja Dadheech
   @group             : 
-  @last modified on  : 07-25-2022
+  @last modified on  : 07-11-2022
   @last modified by  : Anuja Dadheech
 -->
 
 <template>
-  <template if:true={loaded}>
-    <!--Heading Of the Screen-->
-    <div class="container slds-p-around_small">
-      <div class="slds-text-heading_large slds-p-around_small">
-        <b> CV </b>
-      </div>
-      <div
-        class="slds-text-color_default slds-p-bottom_medium slds-p-left_medium"
-      >
-        <h3>Upload your CV</h3>
-      </div>
 
-      <!--Body-->
-      <lightning-layout multiple-rows>
-        <!--File Upload-->
-        <lightning-layout-item
-          size="12"
-          small-device-size="12"
-          medium-device-size="12"
-          large-device-size="12"
-          padding="around-small"
-        >
-          <div class="slds-p-around_medium lgc-bg">
-            <lightning-input
-              type="file"
-              accept=".doc, .docx, .pdf"
-              label="Upload CV"
-              onchange={openfileUpload}
-            >
-            </lightning-input>
-          </div>
-        </lightning-layout-item>
+    <template if:true={loaded}>
 
-        <template if:true={fileData}>
-          <lightning-layout-item
-            size="12"
-            small-device-size="12"
-            medium-device-size="12"
-            large-device-size="12"
-            padding="around-small"
-          >
-            <div class="lgc-bg">
-              <lightning-layout multiple-rows>
-                <lightning-layout-item size="1" padding="around-small">
-                  <lightning-icon
-                    icon-name="utility:file"
-                    alternative-text="File"
-                    title="File"
-                    size="small"
-                  >
-                  </lightning-icon>
+        <!--Heading Of the Screen-->
+        <div class="container slds-p-around_small">
+            <div class="slds-text-heading_large slds-p-around_small">
+                <b> CV </b>
+            </div>
+            <div class="slds-text-color_default  slds-p-bottom_medium slds-p-left_medium">
+                <h3> Upload your CV </h3>
+            </div>
+
+            <!--Body-->
+            <lightning-layout multiple-rows>
+                <!--File Upload-->
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12"
+                    padding="around-small">
+                    <div class="slds-p-around_medium lgc-bg">
+                        <lightning-input type="file" accept=".doc, .docx, .pdf" label="Upload CV"
+                            onchange={openfileUpload}>
+                        </lightning-input>
+                    </div>
                 </lightning-layout-item>
-                <lightning-layout-item size="10" padding="around-small">
-                  <div class="slds-p-horizontal_xxx-small">
-                    <b>{fileData.Title}</b>
-                    <br />
-                    <p class="slds-text-color_weak">{fileData.size}</p>
-                  </div>
-                </lightning-layout-item>
-                <!-- <lightning-layout-item size="1" padding="around-small">
+
+                <template if:true={fileData}>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                        large-device-size="12" padding="around-small">
+                        <div class="lgc-bg">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="1" padding="around-small">
+                                    <lightning-icon icon-name="utility:file" alternative-text="File" title="File"
+                                        size="small">
+                                    </lightning-icon>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="10" padding="around-small">
+                                    <div class="slds-p-horizontal_xxx-small">
+                                        <b>{fileData.Title}</b>
+                                        <br>
+                                        <p class="slds-text-color_weak">{fileData.size}</p>
+                                    </div>
+                                </lightning-layout-item>
+                                <!-- <lightning-layout-item size="1" padding="around-small">
                                     <template if:true={fileData.downloadUrl}>
                                         <a href={fileData.downloadUrl} download>
                                             <lightning-icon icon-name="utility:download" alternative-text="download"
@@ -74,31 +56,27 @@
                                         </a>
                                     </template>
                                 </lightning-layout-item> -->
-                <lightning-layout-item size="1" padding="around-small">
-                  <lightning-icon
-                    icon-name="utility:clear"
-                    alternative-text="Remove"
-                    title="Remove"
-                    size="x-small"
-                    onclick={remove}
-                  >
-                  </lightning-icon>
-                </lightning-layout-item>
-              </lightning-layout>
-            </div>
-          </lightning-layout-item>
-        </template>
-      </lightning-layout>
-    </div>
-  </template>
+                                <lightning-layout-item size="1" padding="around-small">
+                                    <lightning-icon icon-name="utility:clear" alternative-text="Remove" title="Remove"
+                                        size="x-small" onclick={remove}>
+                                    </lightning-icon>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </lightning-layout-item>
+                </template>
 
-  <!--Spinner-->
-  <template if:false={loaded}>
-    <div style="height: 100px">
-      <lightning-spinner
-        alternative-text="Loading"
-        size="medium"
-      ></lightning-spinner>
-    </div>
-  </template>
+            </lightning-layout>
+
+        </div>
+
+    </template>
+
+    <!--Spinner-->
+    <template if:false={loaded}>
+        <div style="height: 100px;">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+    
 </template>

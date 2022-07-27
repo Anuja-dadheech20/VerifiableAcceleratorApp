@@ -53,6 +53,9 @@ export default class GetStarted extends LightningElement {
     this.subscribeToMessageChannel();
     if (this.recordId != undefined || contactId) {
       if (contactId) {
+        contactId = encodeURI(contactId);
+        contactId = contactId.replaceAll('%20','+');
+        console.log('53',contactId);
         this.recordId = contactId;
       }
       console.log("encrypted record id", this.recordId);

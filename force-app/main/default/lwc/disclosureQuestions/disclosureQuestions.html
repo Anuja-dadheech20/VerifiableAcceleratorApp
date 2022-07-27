@@ -1,77 +1,62 @@
 <!--
   @description       : 
   @author            : Anuja Dadheech 
-  @last modified on  : 07-25-2022
+  @last modified on  : 07-20-2022
   @last modified by  : Anuja Dadheech
 -->
 
 <template>
-  <!--Heading-->
-  <template if:true={loaded}>
-    <div class="container slds-p-around_small">
-      <div class="slds-text-heading_large slds-p-around_small">
-        <b> Disclosure Questions </b>
-      </div>
 
-      <br />
+    <!--Heading-->
+    <template if:true={loaded}>
+        <div class="container slds-p-around_small">
+            <div class="slds-text-heading_large slds-p-around_small">
+                <b> Disclosure Questions </b>
+            </div>
 
-      <!--Body-->
-      <template
-        for:each={questionAnswersArray}
-        for:item="each"
-        for:index="index"
-      >
-        <div key={each} class="slds-p-around_small">
-          <lightning-layout multiple-rows>
-            <lightning-layout-item size="12">
-              <b class="slds-p-around_x-small slds-text-heading_small"
-                >{each.Name}</b
-              >
-              <lightning-radio-group
-                variant="label-hidden"
-                data-index={index}
-                class="slds-p-around_x-small"
-                value={each.Response}
-                onchange={handleInputChange}
-                name={index}
-                label="Response ?"
-                options={radioButtonOptions}
-                type="radio"
-              ></lightning-radio-group>
-            </lightning-layout-item>
+        <br>
 
-            <lightning-layout-item size="12" class="slds-p-around_x-small">
-              <p style="font-size: medium">{each.Description}</p>
-            </lightning-layout-item>
+        <!--Body-->
+        <template for:each={questionAnswersArray} for:item="each" for:index="index">
 
-            <template if:true={each.Needs_Review__c}>
-              <lightning-layout-item size="12" class="slds-p-around_x-small">
-                <lightning-textarea
-                  class="custom-size"
-                  data-id={index}
-                  data-index={index}
-                  value={each.Answer__c}
-                  onchange={handleInputChange}
-                  name={index}
-                  label="Please Explain"
-                  max-length="255"
-                  required
-                ></lightning-textarea>
-              </lightning-layout-item>
-            </template>
-          </lightning-layout>
+            <div key={each} class="slds-p-around_small">
+
+                <lightning-layout multiple-rows>
+
+                    <lightning-layout-item size="12">
+                        <b class="slds-p-around_x-small slds-text-heading_small">{each.Name}</b>
+                        <lightning-radio-group variant="label-hidden" data-index={index} class="slds-p-around_x-small"
+                            value={each.Response} onchange={handleInputChange} name={index} label="Response ?"
+                            options={radioButtonOptions} type="radio"></lightning-radio-group>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="12" class="slds-p-around_x-small">
+                        <p style="font-size:medium;">{each.Description}</p>
+                    </lightning-layout-item>
+
+                    <template if:true={each.Needs_Review__c}>
+                        <lightning-layout-item size="12" class="slds-p-around_x-small">
+                            <lightning-textarea class="custom-size" data-id={index} data-index={index} value={each.Answer__c} onchange={handleInputChange}
+                                name={index} label="Please Explain" max-length="255" required></lightning-textarea>
+                        </lightning-layout-item>
+
+                    </template>
+
+                </lightning-layout>
+
+            </div>
+
+        </template>
+
         </div>
-      </template>
-    </div>
-  </template>
 
-  <!--Spinner-->
-  <template if:false={loaded}>
-    <div style="height: 100px">
-      <lightning-spinner
-        alternative-text="Loading"
-        size="medium"
-      ></lightning-spinner>
-    </div>
-  </template>
+    </template>
+
+    <!--Spinner-->
+    <template if:false={loaded}>
+        <div style="height: 100px;">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+    
 </template>

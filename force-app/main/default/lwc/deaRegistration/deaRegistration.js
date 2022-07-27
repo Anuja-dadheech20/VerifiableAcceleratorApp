@@ -8,6 +8,7 @@ import {
   MessageContext
 } from "lightning/messageService";
 import StepCompletionEvent from "@salesforce/messageChannel/StepCompletionEvent__c";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 // DEA Number fields
 const RELATED_RECORDS_FIELDS = ["Id", "Name"];

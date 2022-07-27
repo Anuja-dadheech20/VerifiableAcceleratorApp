@@ -1,0 +1,111 @@
+<!--
+  @description       : 
+  @author            : Anuja Dadheech
+  @group             : 
+  @last modified on  : 07-18-2022
+  @last modified by  : Anuja Dadheech
+-->
+<template>
+
+    <template if:true={loaded}>
+
+        <!--Heading of the screen-->
+        <div class="container slds-p-around_small">
+            <div class="slds-text-heading_large slds-p-around_small">
+                <b> Basic Information </b>
+            </div>
+
+            <!-- <div class="slds-text-color_default slds-p-around_small">
+                <h2><b class="slds-text-heading_small"> Demographics </b></h2>
+            </div> -->
+
+            <!--Body of the screen-->
+            <lightning-layout multiple-rows style="min-width: 48vw;">
+
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8"
+                    class="slds-p-around_small">
+                    <lightning-input type="text" value={contact.ssn} label="Social Security Number" class="ssn"
+                        max-length="11" pattern="[0-9]{3}-[0-9]{2}-[0-9]{4}$" message-when-pattern-mismatch="Please enter a valid SSN in NNN-NN-NNNN format" >
+                    </lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12"
+                    class="slds-align_absolute-left">
+                    <lightning-input type="checkbox" checked={otherLanguage}
+                        label="I speak another language (Other than English)" onchange={handleLanguageCheckbox}
+                        class="slds-m-around_small" >
+                    </lightning-input>
+                </lightning-layout-item>
+
+                <template if:true={otherLanguage}>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                        large-device-size="12">
+                        <template for:each={languageArray} for:item="each" for:index="index">
+                            <div key={each}>
+                                <lightning-layout>
+                                
+                                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                                        large-device-size="6" class="slds-p-around_x-small slds-align_absolute-left">   
+                                        
+                                            <lightning-icon class="slds-p-around_x-small" data-index={index}
+                                            icon-name="utility:clear" alternative-text="Remove" title="Remove"
+                                            size="x-small" onclick={removeLanguage}>
+                                        </lightning-icon>
+                                        <span>Language {index}</span>
+                                        <lightning-input class="input slds-m-left_medium" data-index={index} name="Language"
+                                            label="Language " type="text" max-length="100" value={each.Languages__c}
+                                            onchange={handleLanguageChange} style="width:90%;">
+                                        </lightning-input>
+
+                                        
+                                        
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                        </template>
+                    </lightning-layout-item>
+                     <!--Add Language Button-->
+                <lightning-button class="slds-p-around_medium" label="Add Language" title="Add Language"
+                onclick={addLanguages}></lightning-button>
+                </template>
+
+                <lightning-layout-item size="12" class="slds-align_absolute-left" small-device-size="12" medium-device-size="12"
+                large-device-size="12" padding="around-small">
+                <lightning-input type="text" value={contact.address} label="Home Address"
+                  class="slds-m-around_xxx-small add1" placeholder="Address Line " max-length="255" style="width:66%;"></lightning-input>
+              </lightning-layout-item>
+      
+              <lightning-layout-item size="12" small-device-size="12" medium-device-size="3" large-device-size="3"
+                padding="around-small">
+                <lightning-input type="text" value={contact.city} label="City" class="slds-m-around_xxx-small city"
+                  placeholder="City" max-length="255" >
+                </lightning-input>
+              </lightning-layout-item>
+      
+              <lightning-layout-item size="12" small-device-size="12" medium-device-size="3" large-device-size="3"
+                padding="around-small">
+                <lightning-combobox name="State" label="State" value={contact.state} class="slds-m-around_xxx-small state"
+                  placeholder="State" options={StateList} onchange={handleStateChange} >
+                </lightning-combobox>
+              </lightning-layout-item>
+      
+              <lightning-layout-item size="12" small-device-size="12" medium-device-size="2" large-device-size="2"
+                padding="around-small">
+                <lightning-input type="text" value={contact.zipcode} label="Zip Code" class="slds-m-around_xxx-small zipcode"
+                  placeholder="Zip Code" max-length="10" style="width:100%;"></lightning-input>
+              </lightning-layout-item>
+
+    </lightning-layout>
+
+    </div>
+
+</template>
+
+<!--Spinner-->
+<template if:false={loaded}>
+    <div style="height: 100px;">
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+</template>
+
+</template>

@@ -1,0 +1,60 @@
+<!--
+  @description       : 
+  @author            : Anuja Dadheech
+  @group             : 
+  @last modified on  : 07-18-2022
+  @last modified by  : Anuja Dadheech
+-->
+<template>
+
+  <template if:true={loaded}>
+
+    <!--Heading of the screen-->
+    <div class="container slds-p-around_small">
+      <div class="slds-text-color_default slds-p-top_medium slds-p-left_medium">
+        <h3><b class="slds-text-heading_small"> Address </b></h3>
+      </div>
+
+      <!--Body of the screen-->
+      <lightning-layout multiple-rows>
+
+        <lightning-layout-item size="12" class="slds-align_absolute-left" small-device-size="12" medium-device-size="12"
+          large-device-size="12" padding="around-small" style="width: 100%">
+          <lightning-input type="text" value={contact.address1} label="Home Address"
+            class="slds-m-around_xxx-small add1" placeholder="Address Line " max-length="255"></lightning-input>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4"
+          padding="around-small">
+          <lightning-input type="text" value={contact.city} label="City" class="slds-m-around_xxx-small city"
+            placeholder="City" max-length="255">
+          </lightning-input>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4"
+          padding="around-small">
+          <lightning-combobox name="State" label="State" value={selectedState} class="slds-m-around_xxx-small state"
+            placeholder="State" options={StateList} onchange={handleStateChange}>
+          </lightning-combobox>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4"
+          padding="around-small">
+          <lightning-input type="text" value={contact.zipcode} label="Zip Code" class="slds-m-around_xxx-small zipcode"
+            placeholder="Zip Code" max-length="10"></lightning-input>
+        </lightning-layout-item>
+
+      </lightning-layout>
+
+    </div>
+
+  </template>
+
+  <!--Spinner-->
+  <template if:false={loaded}>
+    <div style="height: 100px;">
+      <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+  </template>
+
+</template>

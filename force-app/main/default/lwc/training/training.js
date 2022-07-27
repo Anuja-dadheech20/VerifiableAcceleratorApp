@@ -9,6 +9,7 @@ import {
 } from "lightning/messageService";
 import StepCompletionEvent from "@salesforce/messageChannel/StepCompletionEvent__c";
 import TrainingTypeJson from "@salesforce/resourceUrl/TrainingTypeJson";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 //Training Object Fields
 const RELATED_RECORDS_FIELDS = [

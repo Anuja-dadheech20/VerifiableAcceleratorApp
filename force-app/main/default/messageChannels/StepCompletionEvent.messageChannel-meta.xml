@@ -3,8 +3,8 @@
     <description>Lightning Message Channel for communication between parent and child components.</description>
     <isExposed>true</isExposed>
     <lightningMessageFields>
-        <description>Field which reflects the current name of the step. </description>
+        <description>Field which reflects the current name of the step.</description>
         <fieldName>stepName</fieldName>
     </lightningMessageFields>
-    <masterLabel>ProviderApplicationStepCompletion</masterLabel>
+    <masterLabel>YourMessageChannelName</masterLabel>
 </LightningMessageChannel>
